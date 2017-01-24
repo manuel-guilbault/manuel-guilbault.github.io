@@ -11,7 +11,7 @@ permalink:        /blog/:year/:month/:day/:title
 title:            'Manuel Guilbault'
 tagline:          'Software like clockwork...'
 description:      'Programming, algorithms, life etc.'
-url:              'http://manuel-guilbault.github.io'
+url:              'https://manuel-guilbault.github.io'
 baseurl:          ''
 author:           'Manuel Guilbault'
 
