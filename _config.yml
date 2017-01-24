@@ -1,0 +1,71 @@
+# Configurations
+markdown: kramdown
+markdown_ext:  markdown,mkdown,mkdn,mkd,md
+highlighter: rouge
+# highlighter: pygments
+
+# Permalinks
+permalink:        /blog/:year/:month/:day/:title
+
+# Setup
+title:            'Manuel Guilbault'
+tagline:          'Software like clockwork...'
+description:      'Programming, algorithms, life etc.'
+url:              'http://manuelguilbault.com'
+baseurl:          ''
+author:           'Manuel Guilbault'
+
+# Navigation
+navigation:
+- text: About
+  url: /about/
+- text: Blog
+  url: /blog/
+- text: Tags
+  url: /tags/
+- text: Archive
+  url : /archive/
+- text: Links
+  url: /links/
+- text: Books
+  url: /books/
+
+#Social Media links (Use complete URL except for email)
+dribbble:
+email:
+facebook:       
+flickr:
+github:         'https://github.com/manuel-guilbault'
+gplus:          
+instagram:
+pinterest:
+linkedin:       'https://fr.linkedin.com/in/manuel-guilbault'
+rss:
+stackoverflow:  
+twitter:        'https://twitter.com/manuguilbault'
+
+# Google Analytics
+gahandler: 'UA-90742674-1'
+
+#if footersvg is 'true' the social media links will be shown top on the copy right in the footer
+footersvg: 'true'
+
+# Disqus
+disqushandler: 'manuel-guilbault-github-io'
+
+# Blog Configurations
+excerpt_separator: '<!--more-->'
+paginate: 10 # Posts per page on the blog index
+paginate_path: '/blog/page:num'
+destination: ./_site
+future: false
+# Feed 
+feed:
+  path: atom.xml
+
+# Custom vars
+version:          0.9x beta 2 (custom)
+
+# Gems
+gems:
+  - jekyll-feed
