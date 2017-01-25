@@ -289,12 +289,12 @@ code {
 pre {
     padding: 8px 12px;
     overflow-x: auto;
+}
 
-    > code {
-        border: 0;
-        padding-right: 0;
-        padding-left: 0;
-    }
+pre > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .highlight .lineno {
@@ -311,6 +311,43 @@ pre {
   word-wrap: normal;
 }
 
+
+
+/*
+  Tags
+*/
+.tag {
+  color: #999;
+  font-size: 1rem;
+  padding-right: 0.3rem;
+  text-decoration: none; 
+  text-transform: capitalize;
+  font-weight: bold; 
+  font-family: "Quattrocento Sans", sans-serif;
+}
+
+a.tag:hover {
+  text-decoration: none; 
+  color: black;
+}
+
+/*
+  Badges
+*/
+.badge {
+  background-color: #636c72;
+  padding-right: .6em;
+  padding-left: .6em;
+  border-radius: 10rem;
+  color: #fff;
+  font-size: 0.9em;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+a:hover .badge {
+  background-color: black;
+}
 
 /*
   Social media icons
@@ -448,19 +485,4 @@ pre {
 
 .fa-codepen:hover {
 	color: black;
-}
-
-.tag {
-  color: #999;
-  font-size: 1rem;
-  padding-right: 0.3rem;
-  text-decoration: none; 
-  text-transform: capitalize;
-  font-weight: bold; 
-  font-family: "Quattrocento Sans", sans-serif;
-}
-
-a.tag:hover {
-  text-decoration: none; 
-  color: black;
 }
