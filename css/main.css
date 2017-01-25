@@ -226,6 +226,12 @@ blockquote p {
   text-decoration: none;
 }
 
+.footer .post-date a {
+  padding: 0;
+  color: black;
+  text-decoration: underline;
+}
+
 .footer a:hover {
   color: #333;
 }
