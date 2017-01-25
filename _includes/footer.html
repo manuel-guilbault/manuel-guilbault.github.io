@@ -4,5 +4,7 @@
   <a href="https://github.com/{{ site.author.github }}"><i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
   <a href="mailto:{{ site.author.email }}"><i class="fa fa-envelope" aria-hidden="true" target="_blank"></i></a>
   <a href="{{ site.baseurl }}/rss.xml"><i class="fa fa-rss"  aria-hidden="true" target="_blank"></i></a>
-  <div class="post-date"><a href="{{ site.baseurl }}/about.html">{{ site.author.name }}</a></div>
+  <div class="post-date">
+    &copy; {{ site.time | date: '%Y' }} - {{ site.author.name }}. All rights reserved
+  </div>
 </footer>
