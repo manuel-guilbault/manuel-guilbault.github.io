@@ -5,6 +5,8 @@ tags: [Aurelia, JS, Web]
 published : true
 --- 
 
-[Aurelia](http://aurelia.io/) is a next generation SPA framework, initiated by [Rob Eisenberg](http://robeisenberg.com/), creator of 
-[Durandal](http://durandaljs.com/). I'm really proud to be featured on the blog this week. 
-[Check it out](http://blog.aurelia.io/2015/06/05/building-aurelias-focus-attribute/)!
+[Aurelia](http://aurelia.io/){:target="_blank"} is a next generation SPA framework, initiated by 
+[Rob Eisenberg](http://robeisenberg.com/){:target="_blank"}, creator of 
+[Durandal](http://durandaljs.com/){:target="_blank"}. I'm really proud to be featured on the 
+blog this week. 
+[Check it out](http://blog.aurelia.io/2015/06/05/building-aurelias-focus-attribute/){:target="_blank"}!
