@@ -24,5 +24,12 @@ layout: default
   {{ page.date | date: "%Y" }}
   by {{ site.author.name }}
 </span>
+
+{% if page.tags %}
+  {% for tag in page.tags %}
+    <a href="{{ site.baseurl }}/tags/{{tag}}"><span class="label label-primary">{{tag}}</span></a>
+  {% endfor %}
+{% endif %}
+
 {% include social-sharing.html %}
 {% include related-posts.html %}
