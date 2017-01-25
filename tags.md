@@ -13,7 +13,7 @@ title: Tags
 
 <ul class="posts">
   {% for tag in site.tags %}
-    <h2 id="{{ tag[0] | slugify }}">{{ tag[0] }}</h2>
+    <h2 id="{{ tag[0] | slugify }}">{{ tag[0] | capitalize }}</h2>
 
     {% for post in tag[1] %}
       <li itemscope>
