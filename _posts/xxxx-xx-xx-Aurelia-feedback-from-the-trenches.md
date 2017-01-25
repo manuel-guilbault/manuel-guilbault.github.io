@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Aurelia - feedback from the trenches"
-tags: [aurelia, js, web]
+tags: [Aurelia, JS, Web]
 published : false
 --- 
 

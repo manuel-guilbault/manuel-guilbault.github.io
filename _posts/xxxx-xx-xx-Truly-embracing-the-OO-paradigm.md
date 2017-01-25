@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Truly embracing the OO paradigm"
-tags: [aurelia, js, web]
+tags: [Aurelia, JS, Web]
 published : false
 --- 
 

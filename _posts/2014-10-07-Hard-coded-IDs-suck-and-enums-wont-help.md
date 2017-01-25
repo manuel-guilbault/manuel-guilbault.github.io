@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hard-coded IDs suck, and enums won't help"
-tags: [csharp, design]
+tags: [CSharp, Design]
 published : true
 --- 
 

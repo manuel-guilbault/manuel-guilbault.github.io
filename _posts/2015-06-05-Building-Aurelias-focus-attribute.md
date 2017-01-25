@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building Aurelia's focus attribute"
-tags: [aurelia, js, web]
+tags: [Aurelia, JS, Web]
 published : true
 --- 
 

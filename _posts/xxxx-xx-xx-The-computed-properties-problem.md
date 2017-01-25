@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The computed properties problem"
-tags: [aurelia, js, web]
+tags: [CSharp, WPF]
 published : false
 --- 
 
