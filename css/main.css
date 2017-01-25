@@ -330,6 +330,17 @@ a.tag:hover {
   color: black;
 }
 
+ul.tags {
+  margin-bottom: 5rem;
+  padding: 0px;
+  list-style: none;
+}
+
+ul.tags li {
+  list-style-type: none;
+  display: inline;
+}
+
 /*
   Badges
 */
