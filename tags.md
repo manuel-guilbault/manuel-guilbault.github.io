@@ -2,39 +2,26 @@
 layout: page
 title: Tags
 ---
-<div class="row">
-    <div class="col-md-12">
-        <section class="tags">
-            <ul class="nav nav-pills">
-                {% for tag in site.tags %}
-                <li class="red" style="margin:5px">
-                    <a href="#{{ tag[0] | slugify }}"> 
-                        {{ tag | first }}&nbsp;
-                        <span class="badge">
-                            {{ tag | last | size}}
-                        </span>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-    </div>
-</div>
+{% for tag in site.tags %}
+  <a href="#{{ tag[0] | slugify }}" class="tag">
+    {{ tag | first }}&nbsp;
+    <span class="badge">{{ tag | last | size}}</span>
+  </a>
+{% endfor %}
 
 <hr/>
-<div class="row">
-  <div class="col-md-12">
-    {% for tag in site.tags %}
+
+<ul class="posts">
+  {% for tag in site.tags %}
     <h2 id="{{ tag[0] | slugify }}">{{ tag[0] }}</h2>
-    <ul class="tags-expo-posts">
-      {% for post in tag[1] %}
-        <a class="red-link" href="{{ site.baseurl }}{{ post.url }}">
-      <li class="alink">
-        {{ post.title }} ({{ post.date | date_to_string }})
+
+    {% for post in tag[1] %}
+      <li itemscope>
+        <h3>
+          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+          <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date: "%B %-d" }} - <i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span></p>
+        </h3>
       </li>
-      </a>
-      {% endfor %}
-    </ul>
     {% endfor %}
-  </div>
-</div>
+  {% endfor %}
+</ul>
