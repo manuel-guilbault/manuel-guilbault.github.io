@@ -7,7 +7,7 @@ theme: darken
 
 ## **Friends**
 
-* [Evrim](http://manuel-guilbault.blogspot.fr/){:target="_blank"}
+* [Evrim Senturk](http://mechanicalobject.com/){:target="_blank"}
 
 ## **Blogs I follow**
 
