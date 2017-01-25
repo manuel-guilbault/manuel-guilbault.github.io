@@ -331,7 +331,6 @@ a.tag:hover {
 }
 
 ul.tags {
-  margin-bottom: 5rem;
   padding: 0px;
   list-style: none;
 }
@@ -360,7 +359,7 @@ a:hover .badge {
 }
 
 .tag .badge {
-  margin-left: -0.2em;
+  margin-left: -0.1em;
   margin-right: 0.5em;
 }
 
