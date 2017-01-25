@@ -8,10 +8,8 @@
         {% else %}
           <li>
             <h3>
-              <a href="{{ site.baseurl }}{{ related_post.url }}">
-                {{ related_post.title }}
-                <small>{{ related_post.date | date: "%B %-d, %Y" }}</small>
-              </a>
+              <a href="{{ site.baseurl }}{{ related_post.url }}">{{ related_post.title }}</a>
+              <span class="post-date">{{ related_post.date | date: "%B %-d, %Y" }}</span>
             </h3>
           </li>
           {% assign listed_posts_urls = listed_posts_urls | push: related_post.url %}
