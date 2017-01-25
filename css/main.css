@@ -443,3 +443,18 @@ pre {
 .fa-codepen:hover {
 	color: black;
 }
+
+.tag {
+  color: #999;
+  font-size: 1rem;
+  padding-right: 0.3rem;
+  text-decoration: none; 
+  text-transform: capitalize;
+  font-weight: bold; 
+  font-family: "Quattrocento Sans", sans-serif;
+}
+
+a.tag:hover {
+  text-decoration: none; 
+  color: black;
+}
