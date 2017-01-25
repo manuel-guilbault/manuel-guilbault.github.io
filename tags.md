@@ -4,8 +4,7 @@ title: Tags
 ---
 {% for tag in site.tags %}
   <a href="#{{ tag[0] | slugify }}" class="tag">
-    #{{ tag | first }}&nbsp;
-    <span class="badge">{{ tag | last | size}}</span>
+    #{{ tag | first }}&nbsp;<span class="badge">{{ tag | last | size}}</span>
   </a>
 {% endfor %}
 
