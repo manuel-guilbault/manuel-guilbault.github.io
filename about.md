@@ -13,6 +13,3 @@ My previous blog was on [Blogger](https://www.blogger.com/){:target="_blank"}. H
 more control over the layout, the CSS, and more globally the features. At this point, my collegue 
 [Evrim Senturk](http://mechanicalobject.com/){:target="_blank"} showed me his brand new blog, and 
 I just decided to bluntly copy his solution. Thanks dude!
-
-*   [Lagrange](https://lenpaul.github.io/Lagrange/){:target="_blank"} theme
-*   Hosted on GitHub
