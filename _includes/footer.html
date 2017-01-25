@@ -1,15 +1,8 @@
-<footer class="row">
-      <div class="col-ms-12 text-center">
-            <hr/>
-            {% if site.footersvg == 'true' %}
-                  <div>{% include svg-icons.html %}</div>
-            {% endif %}
-            &copy; {{ site.time | date: '%Y' }} - {{site.author}}. All rights reserved<br/>
-            Built using 
-            {% if page.theme And page.theme != "" And page.theme != nil %}
-            <a class="{{page.theme}}-link" href="http://jekyllrb.com/">Jekyll</a>
-            {% else %}
-            <a href="http://jekyllrb.com/">Jekyll</a>
-            {% endif %}
-      </div>
+<footer class="footer">
+  <a href="https://twitter.com/{{ site.author.twitter }}"><i class="fa fa-twitter" aria-hidden="true" target="_blank"></i></a>
+  <a href="https://linkedin.com/in/{{ site.author.linkedin }}"><i class="fa fa-linkedin" aria-hidden="true" target="_blank"></i></a>
+  <a href="https://github.com/{{ site.author.github }}"><i class="fa fa-github" aria-hidden="true" target="_blank"></i></a>
+  <a href="mailto:{{ site.author.email }}"><i class="fa fa-envelope" aria-hidden="true" target="_blank"></i></a>
+  <a href="{{ site.baseurl }}/rss.xml"><i class="fa fa-rss"  aria-hidden="true" target="_blank"></i></a>
+  <div class="post-date"><a href="{{ site.baseurl }}/about.html">{{ site.author.name }}</a></div>
 </footer>

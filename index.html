@@ -1,89 +1,35 @@
---- 
-layout: master 
-title: Home 
-description: Home, home sweet home ... 
+---
+layout: default
+title: Home
 ---
 
-<div class="container">
+{% for post in paginator.posts %}
+<div class="posts">
+  <h1>
+    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+  </h1>
+  {% if post.image.teaser %}
+    <a href="{{ site.baseurl }}{{ post.url }}"><img src="{{ site.baseurl }}/images/{{ post.image.teaser }}"></a>
+  {% endif %}
+  <p>
+    {{ post.content | strip_html | truncate: 350 }} <a href="{{ site.baseurl }}{{ post.url }}">Read more</a>
+    <span class="post-date" style="margin-top:3px"><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date_to_string }} - <i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>
+  </p>
+</div>
+{% endfor %}
 
-	<header class="row">
-	  <div class="col-sm-6 col-md-12" style="margin-top:25px;margin-bottom:25px">
-	    <h1 id="pin">{{site.tagline}}</h1>
-	  </div>
-	</header>
-	<nav>
-		<div class="row">
-			<div class="col-md-4 col-sm-3 col-xs-6">
-				<a href="blog/" title="Blog">
-					<div class="tile red">
-						<h3 class="title">Blog</h3>						
-					</div>
-				</a>
-			</div>
-					<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="about/" title="About Me">
-					<div class="tile yellow">
-						<h2 class="title">About</h2>						
-					</div>
-				</a>
-		    </div>			
-		</div>
-		<!--ROW ==> Feeds and other sites-->
-		<div class="row">
-				
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				{% for post in site.posts limit:1 %}
-				<a href="{{post.url}}" title="Latest Article">
-					<div class="tile orange">
-						<h3 class="title">Latest Article</h3>
-						<h4 class="title">{{ post.title }}</h4>
-						<p> {{ post.content | strip_html | truncatewords: 10 }}</p>
-					</div>
-				</a>
-				{% endfor %}
-			</div>	
-		</div>
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-button pagination-active" href="{{ site.baseurl }}{{ paginator.next_page_path }}" class="next">Older</a>
+  {% else %}
+    <span class="pagination-button">Older</span>
+  {% endif %}
 
-		<div class="row">
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="links/" title="Links">
-					<div class="tile green">
-						<h3 class="title">Links</h3>						
-					</div>
-				</a>
-			</div>			
-		</div>
-		<div class="row">
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="books/" title="Books">
-					<div class="tile teal">
-						<h3 class="title">Books</h3>						
-					</div>
-				</a>
-			</div>
-		</div>
-		<!--ROW ==> LINKS-->
-		<div class="row" style="margin-bottom:25px">
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="{{site.github}}" title="Github" class="tile darken" target="_blank">
-					<i class="icon-gthb" style="font-size:8em"></i>					
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="{{site.twitter}}" title="Twitter" class="tile orange" target="_blank">
-					<i class="icon-twtr" style="font-size:8em"></i>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="{{site.linkedin}}" title="LinkedIn" class="tile purple" target="_blank">
-					<i class="icon-lkin" style="font-size:8em"></i>
-				</a>
-			</div>		
-			<div class="col-md-2 col-sm-3 col-xs-6">
-				<a href="feed.xml" title="RSS Feed" class="tile cyan" target="_blank">
-					<i class="icon-rss" style="font-size:8em"></i>
-				</a>
-			</div>	
-		</div>
-	</nav>
+  {% if paginator.previous_page %}
+    <a class="pagination-button pagination-active" href="{{ site.baseurl }}{{ paginator.previous_page_path }}">Newer</a>
+    {% else %}
+      <span class="pagination-button">Newer</span>
+  {% endif %}
+
 </div>
