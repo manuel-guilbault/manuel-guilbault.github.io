@@ -3,7 +3,7 @@ title:               "Manuel Guilbault"
 #tagline:             ""
 description:         ""
 baseurl:             ""
-url:                 "https://manuel-guilbault.github.io"
+url:                 "http://manuelguilbault.com"
 paginate:            5
 author:
   name:              "Manuel Guilbault"
@@ -11,8 +11,6 @@ author:
   twitter:           "manuguilbault"
   github:            "manuel-guilbault"
   linkedin:          "manuel-guilbault"
-github:
-  url:               "https://manuel-guilbault.github.io"
 google:
   analytics:
     propertyId:      "UA-90742674-1"
