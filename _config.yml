@@ -17,7 +17,7 @@ google:
   analytics:
     propertyId:      "UA-90742674-1"
 disqus:
-  handler:           "manuel-guilbault-github-io"
+  handler:           "manuelguilbault"
 
 # Build settings
 markdown:            kramdown
