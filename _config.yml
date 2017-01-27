@@ -4,8 +4,11 @@ title:               "Manuel Guilbault"
 description:         ""
 baseurl:             ""
 url:                 "http://manuelguilbault.com"
-permalink:           /blog/:year/:month/:day/:title/
 paginate:            5
+collections:
+  posts:
+    output: true
+    permalink:       /blog/:year/:month/:day/:title/
 
 # ID & 3rd parties integration
 author:
