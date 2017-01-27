@@ -6,18 +6,29 @@ layout: null
   <channel>
     <title>{{ site.title | xml_escape }}</title>
     <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/rss.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml" />
+    <link>{{ site.url }}/</link>
+    <atom:link href="{{ "/rss.xml" | prepend: site.url }}" rel="self" type="application/rss+xml" />
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <language>en-us</language>
+    <image>
+      <url>{{ "/images/favicons/favicon-96x96.png" | prepend: site.url }}</url>
+      <title>{{ site.title | xml_escape }}</title>
+      <link>{{ site.url }}/</link>
+      <width>96</width>
+      <height>96</height>
+    </image>
+    <copyright>Copyright {{ site.time | date: '%Y' }} - {{ site.author.name | xml_escape }}. All rights reserved</copyright>
     <generator>Jekyll v{{ jekyll.version }}</generator>
     {% for post in site.posts limit:10 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
         <description>{{ post.content | xml_escape }}</description>
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
+        <author>{{ site.author.email | xml_escape }} ({{ site.author.name | xml_escape }})</author>
+        <link>{{ post.url | prepend: site.url }}</link>
+        <guid isPermaLink="true">{{ post.url | prepend: site.url }}</guid>
+        <source url="{{ "/rss.xml" | prepend: site.url }}">{{ site.title }}</source>
         {% for tag in post.tags %}
         <category>{{ tag | xml_escape }}</category>
         {% endfor %}
