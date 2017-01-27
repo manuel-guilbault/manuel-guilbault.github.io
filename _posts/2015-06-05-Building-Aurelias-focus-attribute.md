@@ -2,8 +2,11 @@
 layout: post
 title: "Building Aurelia's focus attribute"
 tags: [Aurelia, JS, Web]
+image:
+  feature: "aurelia-main-logo.svg"
+  teaser: "aurelia-main-logo.svg"
 published : true
---- 
+---
 
 [Aurelia](http://aurelia.io/){:target="_blank"} is a next generation SPA framework, initiated by 
 [Rob Eisenberg](http://robeisenberg.com/){:target="_blank"}, creator of 
