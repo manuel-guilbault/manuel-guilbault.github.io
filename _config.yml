@@ -4,7 +4,10 @@ title:               "Manuel Guilbault"
 description:         ""
 baseurl:             ""
 url:                 "http://manuelguilbault.com"
+permalink:           "/blog/:year/:month/:day/:title"
 paginate:            5
+
+# ID & 3rd parties integration
 author:
   name:              "Manuel Guilbault"
   email:             "manuel.guilbault@gmail.com"
