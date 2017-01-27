@@ -50,6 +50,10 @@ img {
   border-radius: 5px;
 }
 
+img.auto {
+  width: auto;
+}
+
 /*
   Blockquote
 */
