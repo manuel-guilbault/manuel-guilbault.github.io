@@ -1,21 +1,23 @@
 # Site Settings
 title:               "Manuel Guilbault"
-tagline:             ""
-description:
+#tagline:             ""
+description:         ""
 baseurl:             ""
 url:                 "https://manuel-guilbault.github.io"
-github:
-  url:               "https://manuel-guilbault.github.io"
-google:
-  analytics:
-    propertyId:      "UA-90742674-1"
+paginate:            5
 author:
   name:              "Manuel Guilbault"
   email:             "manuel.guilbault@gmail.com"
   twitter:           "manuguilbault"
   github:            "manuel-guilbault"
   linkedin:          "manuel-guilbault"
-paginate:            5
+github:
+  url:               "https://manuel-guilbault.github.io"
+google:
+  analytics:
+    propertyId:      "UA-90742674-1"
+disqus:
+  handler:           "manuel-guilbault-github-io"
 
 # Build settings
 markdown:            kramdown
