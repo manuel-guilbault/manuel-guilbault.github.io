@@ -11,7 +11,7 @@ collections:
     permalink:       /blog/:year/:month/:day/:title/
   talks:
     output:          true
-    permalink:       /talk/:year/:month/:day/:title/
+    permalink:       /talks/:year/:month/:day/:title/
 
 # ID & 3rd parties integration
 author:

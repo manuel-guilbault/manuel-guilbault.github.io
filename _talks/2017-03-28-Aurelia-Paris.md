@@ -7,7 +7,7 @@ tags: [Aurelia, JS, Web]
 image:
   feature: "aurelia-main-logo.svg"
   teaser: "aurelia-main-logo.svg"
-published : true
+published : false
 ---
 
 I'll be talking about unit testing and end-to-end testing of
