@@ -7,8 +7,11 @@ url:                 "http://manuelguilbault.com"
 paginate:            5
 collections:
   posts:
-    output: true
+    output:          true
     permalink:       /blog/:year/:month/:day/:title/
+  talks:
+    output:          true
+    permalink:       /talk/:path/:title/
 
 # ID & 3rd parties integration
 author:

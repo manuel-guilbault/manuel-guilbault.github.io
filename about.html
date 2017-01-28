@@ -5,7 +5,7 @@ title: About
 
 <img src="{{ site.baseurl }}/images/my-face.jpg" alt="My face" class="auto">
 <p>
-  I'm a lonesome Canadian lost in the Parisian jungle. I write code, design software & IT systems, 
+  I'm a lonesome Canadian lost in the Parisian jungle. I write code, design software &amp; IT systems, 
   coach teams, teach, speak, and write. I put myself in the shoes of the customers and the users 
   of every piece of software I work on - I'm a convinced practitioner of DDD. I like learning new 
   things, both on the technical and the domain side.
@@ -15,6 +15,19 @@ title: About
 <ul>
   <li><a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a></li>
 </ul>
+
+{% if site.talks != null %}
+  <h2 id="talks">Talks</h2>
+  <ul>
+    {% for talk in site.talks %}
+      <li>
+        <a href="{{ site.baseurl }}{{ talk.url }}">
+          {{ talk.title }} - {{ talk.date | date_to_string }}, {{ talk.location }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
 <h2 id="friends">Friends</h2>
 <ul>
