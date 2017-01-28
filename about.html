@@ -22,7 +22,7 @@ title: About
     {% for talk in site.talks %}
       <li>
         <a href="{{ site.baseurl }}{{ talk.url }}">
-          {{ talk.title }} - {{ talk.date | date_to_string }}, {{ talk.location }}
+          {{ talk.title }} - {{ talk.date | date_to_string }} - {{ talk.location }}
         </a>
       </li>
     {% endfor %}
