@@ -11,23 +11,32 @@ title: About
   things, both on the technical and the domain side.
 </p>
 
-<h2 id="publications">Books</h2>
-<ul>
-  <li><a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a></li>
-</ul>
-
 {% if site.talks != null %}
-  <h2 id="talks">Talks</h2>
+  <h2 id="talks">Upcoming talks</h2>
   <ul>
     {% for talk in site.talks %}
       <li>
         <a href="{{ site.baseurl }}{{ talk.url }}">
-          {{ talk.title }} - {{ talk.date | date_to_string }} - {{ talk.location }}
+          {{ talk.title }} 
+          - {% assign d = talk.date | date: "%-d"  %}
+            {{ talk.date | date: "%B" }}
+            {% case d %}
+              {% when '1' or '21' or '31' %}{{ d }}st
+              {% when '2' or '22' %}{{ d }}nd
+              {% when '3' or '23' %}{{ d }}rd
+              {% else %}{{ d }}th{% endcase %},
+            {{ talk.date | date: "%Y" }}
+          - {{ talk.location }}
         </a>
       </li>
     {% endfor %}
   </ul>
 {% endif %}
+
+<h2 id="publications">Books</h2>
+<ul>
+  <li><a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a></li>
+</ul>
 
 <h2 id="friends">Friends</h2>
 <ul>
