@@ -12,6 +12,6 @@ published : true
 
 I'll be talking about unit testing and end-to-end testing of
 an Aurelia application at the 
-[Aurelia Paris meetup](https://www.meetup.com/fr-FR/Aurelia-Paris/){target="_blank"}.
+[Aurelia Paris meetup](https://www.meetup.com/fr-FR/Aurelia-Paris/){:target="_blank"}.
 
 See you there!
