@@ -33,12 +33,24 @@ title: About
   </ul>
 {% endif %}
 
+{% if site.publications != null %}
 <h2 id="publications">Books</h2>
 <ul>
-  <li><a href="https://www.packtpub.com/web-development/learning-aurelia" target="_blank">Learning Aurelia</a></li>
+  {% for publication in site.publications %}
+    <li>
+      <a href="{{ publication.url }}" target="_blank">{{ publication.title }}</a>
+    </li>
+  {% endfor %}
 </ul>
+{% endif %}
 
-<h2 id="friends">Friends</h2>
-<ul>
-  <li><a href="http://mechanicalobject.com/" target="_blank">Evrim Senturk</a></li>
-</ul>
+{% if site.friends != null %}
+  <h2 id="friends">Friends</h2>
+  <ul>
+    {% for friend in site.friends %}
+      <li>
+        <a href="{{ friend.url }}" target="_blank">{{ friend.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

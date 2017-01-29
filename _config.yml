@@ -12,6 +12,10 @@ collections:
   talks:
     output:          true
     permalink:       /talks/:year/:month/:day/:title/
+  publications:
+    output:          false
+  friends:
+    output:          false
 
 # ID & 3rd parties integration
 author:
