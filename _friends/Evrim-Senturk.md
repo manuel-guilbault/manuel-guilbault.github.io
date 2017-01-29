@@ -1,5 +1,5 @@
 ---
 name:       "Evrim Senturk"
-url:        "http://mechanicalobject.com/"
+link:       "http://mechanicalobject.com/"
 published:  true
 ---

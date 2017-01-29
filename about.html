@@ -38,7 +38,7 @@ title: About
 <ul>
   {% for publication in site.publications %}
     <li>
-      <a href="{{ publication.url }}" target="_blank">{{ publication.title }}</a>
+      <a href="{{ publication.link }}" target="_blank">{{ publication.title }}</a>
     </li>
   {% endfor %}
 </ul>
@@ -49,7 +49,7 @@ title: About
   <ul>
     {% for friend in site.friends %}
       <li>
-        <a href="{{ friend.url }}" target="_blank">{{ friend.name }}</a>
+        <a href="{{ friend.link }}" target="_blank">{{ friend.name }}</a>
       </li>
     {% endfor %}
   </ul>

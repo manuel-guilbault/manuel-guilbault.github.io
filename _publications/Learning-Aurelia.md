@@ -1,4 +1,5 @@
 ---
 title:        "Learning Aurelia"
-url:          "https://www.packtpub.com/web-development/learning-aurelia"
+link:         "https://www.packtpub.com/web-development/learning-aurelia"
+published:    true
 ---
