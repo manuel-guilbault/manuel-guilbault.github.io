@@ -11,10 +11,11 @@ title: About
   things, both on the technical and the domain side.
 </p>
 
-{% if site.talks.size > 0 %}
+{% assign publishedTalks = site.talks | where:'published', true %}
+{% if publishedTalks.size > 0 %}
   <h2 id="talks">Upcoming talks</h2>
   <ul>
-    {% for talk in site.talks %}
+    {% for talk in publishedTalks %}
       <li>
         <a href="{{ site.baseurl }}{{ talk.url }}">
           {{ talk.title }} 
@@ -33,10 +34,11 @@ title: About
   </ul>
 {% endif %}
 
-{% if site.publications.size > 0 %}
+{% assign publishedPublications = site.publications | where:'published', true %}
+{% if publishedPublications.size > 0 %}
 <h2 id="publications">Books</h2>
 <ul>
-  {% for publication in site.publications %}
+  {% for publication in publishedPublications %}
     <li>
       <a href="{{ publication.link }}" target="_blank">{{ publication.title }}</a>
     </li>
@@ -44,10 +46,11 @@ title: About
 </ul>
 {% endif %}
 
-{% if site.friends.size > 0 %}
+{% assign publishedFriends = site.friends | where:'published', true %}
+{% if publishedFriends.size > 0 %}
   <h2 id="friends">Friends</h2>
   <ul>
-    {% for friend in site.friends %}
+    {% for friend in publishedFriends %}
       <li>
         <a href="{{ friend.link }}" target="_blank">{{ friend.name }}</a>
       </li>
