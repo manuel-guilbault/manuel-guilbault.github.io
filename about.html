@@ -11,7 +11,7 @@ title: About
   things, both on the technical and the domain side.
 </p>
 
-{% if site.talks != null %}
+{% if site.talks.size > 0 %}
   <h2 id="talks">Upcoming talks</h2>
   <ul>
     {% for talk in site.talks %}
@@ -33,7 +33,7 @@ title: About
   </ul>
 {% endif %}
 
-{% if site.publications != null %}
+{% if site.publications.size > 0 %}
 <h2 id="publications">Books</h2>
 <ul>
   {% for publication in site.publications %}
@@ -44,7 +44,7 @@ title: About
 </ul>
 {% endif %}
 
-{% if site.friends != null %}
+{% if site.friends.size > 0 %}
   <h2 id="friends">Friends</h2>
   <ul>
     {% for friend in site.friends %}
