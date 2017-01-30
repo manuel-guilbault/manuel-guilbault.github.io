@@ -34,4 +34,6 @@ disqus:
 markdown:            kramdown
 highlighter:         rouge
 permalink:           none
-gems:                [jekyll-paginate]
+gems:                
+  - jekyll-paginate
+  - jekyll-sitemap
