@@ -288,7 +288,7 @@ an `image-files-picker` custom element.
                 blob-src.one-time="file">
             <div class="card-img-overlay">
               <button type="button" class="close" aria-label="Remove" 
-                      click.delegate="remove($index)">
+                      click.delegate="remove($parent.$index * 3 + $index)">
                 <span aria-hidden="true">&times;</span>
               </button>
               <p class="card-text">
