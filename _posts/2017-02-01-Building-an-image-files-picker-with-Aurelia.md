@@ -448,9 +448,9 @@ export class SomeAPI {
 }
 ```
 
-> The Mozilla Developer Network has 
-  [some great doc](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects){:target="_blank"}
-  about the `FormData` class.
+*The Mozilla Developer Network has 
+[some great doc](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects){:target="_blank"}
+about the `FormData` class.*
 
 ## Summary
 
