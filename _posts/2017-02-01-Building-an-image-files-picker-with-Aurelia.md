@@ -9,9 +9,9 @@ published : true
 --- 
 
 *This post was initially published on 
-[Aurelia's official blog](http://blog.aurelia.io/2017/02/01/announcing-learning-aurelia-from-packt-publishing/).*
+[Aurelia's official blog](http://blog.aurelia.io/2017/02/01/announcing-learning-aurelia-from-packt-publishing/){:target="_blank"}.*
 
-In my book [Learning Aurelia](https://www.packtpub.com/web-development/learning-aurelia),
+In my book [Learning Aurelia](https://www.packtpub.com/web-development/learning-aurelia){:target="_blank"},
 you can see, among other things, how to build an image file picker component, supporting 
 drag and drop and showing a preview of the selected image.
 
@@ -417,7 +417,7 @@ component. Some logic allowing only image files should be somehow added.
 A basic filtering logic, using the same syntax as the `<input type="file">`
 element's `accept` attribute, is implemented in the complete code sample,
 which you can find 
-[here](https://github.com/manuel-guilbault/learning-aurelia-image-files-picker).
+[here](https://github.com/manuel-guilbault/learning-aurelia-image-files-picker){:target="_blank"}.
 A more complete solution, showing error messages to the user, can easily be
 implemented. I'll leave this as an exercise to the reader.
 
@@ -449,7 +449,7 @@ export class SomeAPI {
 ```
 
 > The Mozilla Developer Network has 
-  [some great doc](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)
+  [some great doc](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects){:target="_blank"}
   about the `FormData` class.
 
 ## Summary
@@ -458,5 +458,5 @@ Once again, Aurelia makes things easy. Its various constructs, such as custom at
 elements, and value converters, help us decompose a problem and solve each of its parts
 with a generic, reusable solution, and then recombine them together to address our initial,
 specific problem. **Shameless plug alert**: this aspect is one of the many topics addressed 
-in [Learning Aurelia](https://www.packtpub.com/web-development/learning-aurelia). You should
+in [Learning Aurelia](https://www.packtpub.com/web-development/learning-aurelia){:target="_blank"}. You should
 definitely give it a look!
