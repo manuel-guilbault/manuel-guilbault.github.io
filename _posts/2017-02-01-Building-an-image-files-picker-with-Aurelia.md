@@ -265,8 +265,8 @@ export class BlobSrc {
 
 ## Bringing it all together
 
-> Each of the parts we saw up to this point is shown in the book,
-> even though some have been modified to fit the current context.
+*Each of the parts we saw up to this point is shown in the book,
+even though some have been modified to fit the current context.*
 
 The last missing piece is the one that brings everything together:
 an `image-files-picker` custom element.
