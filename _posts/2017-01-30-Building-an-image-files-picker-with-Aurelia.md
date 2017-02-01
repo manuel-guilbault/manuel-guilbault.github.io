@@ -5,11 +5,11 @@ tags: [Aurelia, JS, TypeScript, Web]
 image:
   feature: "aurelia-main-logo.svg"
   teaser: "aurelia-main-logo.svg"
-published : false
+published : true
 --- 
 
 *This post was initially published on 
-[Aurelia's official blog](http://blog.aurelia.io/p/d4436feb-17f0-490f-aee9-c08ede3d293b/).*
+[Aurelia's official blog](http://blog.aurelia.io/2017/02/01/announcing-learning-aurelia-from-packt-publishing/).*
 
 In my book [Learning Aurelia](https://www.packtpub.com/web-development/learning-aurelia),
 you can see, among other things, how to build an image file picker component, supporting 
