@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to use a message bus, and how not to"
-tags: [Design, .NET]
+tags: [Design]
 image:
   feature: 2017-02-06-How-to-use-a-message-bus-and-how-not-to/Letters.jpg
   teaser: 2017-02-06-How-to-use-a-message-bus-and-how-not-to/Letters.jpg
