@@ -2,6 +2,7 @@
 title:               "Manuel Guilbault's Blog"
 #tagline:             ""
 description:         ""
+repository:          "manuel-guilbault/manuel-guilbault.github.io"
 baseurl:             ""
 url:                 "http://manuelguilbault.com"
 paginate:            5
@@ -10,7 +11,7 @@ collections:
   posts:
     output:          true
     permalink:       /blog/:year/:month/:day/:title/
-  drafts:
+  post_drafts:
     output:          true
     permalink:       /drafts/:title/
   talks:

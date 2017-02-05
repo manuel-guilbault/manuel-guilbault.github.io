@@ -3,20 +3,21 @@ layout: post
 title: "How to use a message bus, and how not to"
 tags: [Design, .NET]
 image:
-  feature: images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Letters.jpg
-  teaser: images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Letters.jpg
-published : false
+  feature: 2017-02-06-How-to-use-a-message-bus-and-how-not-to/Letters.jpg
+  teaser: 2017-02-06-How-to-use-a-message-bus-and-how-not-to/Letters.jpg
+published : true
 ---
 
 A message bus is an extremely useful piece of technology. There are
-many implementations available out there: [RabbitMQ](https://www.rabbitmq.com/),
-[ActiveMQ](http://activemq.apache.org/), [MSMQ](https://msdn.microsoft.com/en-us/library/ms711472(v=vs.85).aspx),
-or [Azure Service Bus](https://azure.microsoft.com/en-us/services/service-bus/), to name a few.
-However, their usage seems to be misunderstood by many developers.
+many implementations available out there: [RabbitMQ](https://www.rabbitmq.com/){:target="_blank"},
+[ActiveMQ](http://activemq.apache.org/){:target="_blank"}, 
+[MSMQ](https://msdn.microsoft.com/en-us/library/ms711472(v=vs.85).aspx){:target="_blank"},
+or [Azure Service Bus](https://azure.microsoft.com/en-us/services/service-bus/){:target="_blank"}, 
+to name a few. However, their usage seems to be misunderstood by many developers.
 
-Sometime last week, some collegues and I were discussing what we envisioned
+Sometime last week, a couple of collegues and I were discussing what we envisioned
 for the system's architecture in the mid-long term. Some of them brought up
-introducing a message queue, to enable asynchronous processing.
+introducing a message bus to enable asynchronous processing.
 The way my teammates seemed to see it, a message bus would magically fix
 performance problems. I disagreeed.
 
@@ -25,19 +26,19 @@ performance problems. I disagreeed.
 We work together on a reservation system for a world-leading tour operator. The
 system is built using .NET technologies and exposes web APIs allowing various web 
 sites to search for flights and to book seats, along with a back office allowing
-the company's staff to manage flights, their capacity, and their pricing.
+the company's staff to manage flights, capacity and pricing.
 
 The system's architecture follows a pattern which is pretty common in old .NET projects
-and which I call a *layered monolith*. *Layered*, because the code is sliced in
+and which I call a *layered monolith*. Layered, because the code is sliced in
 layers:
 
 ![Layers]({{ site.baseurl }}/images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Layers.svg)
 
-*Monolith*, for two very distinct reasons. First, the classes making those layers are 
+Monolith, for two very distinct reasons. First, the classes making those layers are 
 most of the time tightly coupled together, meaning that it is impossible to change the
 composition of the system without changing the code. Second, the boundaries between
 the functional domains are sometimes blurry, often unexistant. The system is
-a [Big Ball of Mud](http://www.laputan.org/mud/) in all of its glory.
+a [Big Ball of Mud](http://www.laputan.org/mud/){:target="_blank"} in all of its glory.
 
 ## The bus layer
 
@@ -57,7 +58,7 @@ Let's see the implicit problems of this solution.
 
 ## Not all operations are commands
 
-The system we work on globally follow the [CQRS](https://en.wikipedia.org/wiki/Command–query_separation) 
+The system we work on globally follows the [CQRS](https://en.wikipedia.org/wiki/Command–query_separation){:target="_blank"}
 principles: operations are either commands or queries. Commands are used to change 
 the system's state, while queries simply retrieve some part of the system's current state and
 are side-effect free.
@@ -81,18 +82,22 @@ will still block while waiting for a response, because such queries are implicit
 synchronous operations (don't forget that here, the presentation layer is a web API).
 
 Of course, the argument stating that it can scale more easily by adding more
-dispatching processes stands still. However, the same is true by vertically scaling
-the web API itself, and such a solution is much simpler.
+dispatching processes still stands. However, the same is true by simply adding 
+instances of the web API itself, and such a solution is much simpler than this
+amended architecture. Additionally, it requires almost no changes in the existing
+architecture.
 
 ## Not all commands are fire-and-forget
 
-We could say that queries will bypass the whole bus layer, and will be sent
-synchronously by the presentation layer to the business layer, and commands
-are sent asynchronously through the bus layer.
+We could say that queries would bypass the whole bus layer, and would be sent
+synchronously by the presentation layer to the business layer, and that commands
+would be sent asynchronously through the bus layer.
+
+![Bypasing the bus layer]({{ site.baseurl }}/images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Bypassing-the-bus-layer.svg)
 
 However, not all commands are fire-and-forget. Some commands can be executed
-only when the system in a specific state. Such commands must be validated
-before they can be executed to make sure it doesn't violate some system invariant.
+only when the system is in a specific state. Such commands must be validated
+before they can be executed to make sure they don't violate any system invariant.
 If the validation process fails, the caller - may it be a user or another system - 
 usually needs to be notified that the command failed and, more importantly,
 why it failed.
@@ -102,13 +107,13 @@ both ways.
 
 ## When is a message bus relevant?
 
-For me, a message bus really shines in a single scenario: to let other parts of
-the system - or even other systems - know that something *already* happened.
+For me, a message bus really shines when it is used to let other parts of
+the system - or even other systems - know that something *just happened*.
 
 A command's side effects can be asynchronously applied only if they support 
-[eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency). 
-If a command's side effect be in the same logical transaction as its command, 
-it can't be processed as an asynchronous event.
+[eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency){:target="_blank"}. 
+If a command's side effect must be in the same logical transaction as its command, 
+it can't be processed asynchronously.
 
 This forces developers to explicitely define the system's commands, their
 side effects, and the consistency model of each side effect.
@@ -119,5 +124,5 @@ A message bus is not a silver bullet. It adds complexity to a system, and
 must be used when it adds real value. In short:
 
 * Don't use it as an over-complex call stack
-* Use it to notify the outside world (other bounded contexts) that something *already* happened
+* Use it to notify the outside world (other systems or bounded contexts) that something *already* happened
 * Use it for side-effects that can be eventually consistent
