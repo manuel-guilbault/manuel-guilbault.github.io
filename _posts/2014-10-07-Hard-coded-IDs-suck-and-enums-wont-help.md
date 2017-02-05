@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Hard-coded IDs suck, and enums won't help"
 tags: [CSharp, Design]
 published : true

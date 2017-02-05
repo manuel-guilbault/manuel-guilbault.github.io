@@ -9,7 +9,7 @@ title: Home
     <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
   </h1>
   {% if post.image.teaser %}
-    <a href="{{ site.baseurl }}{{ post.url }}"><img src="{{ site.baseurl }}/images/posts/{{ post.image.teaser }}"></a>
+    <a href="{{ site.baseurl }}{{ post.url }}"><img src="{{ site.baseurl }}/images/{{ post.image.teaser }}"></a>
   {% endif %}
   <p>
     {{ post.content | strip_html | truncate: 350 }} <a href="{{ site.baseurl }}{{ post.url }}">Read more</a>

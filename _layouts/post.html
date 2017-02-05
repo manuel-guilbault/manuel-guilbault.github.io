@@ -7,7 +7,7 @@ layout: default
 </h1>
 
 {% if page.image.feature %}
-  <img src="{{ site.baseurl }}/images/posts/{{ page.image.feature }}">
+  <img src="{{ site.baseurl }}/images/{{ page.image.feature }}">
 {% endif %}
 
 {{ content }}
@@ -33,5 +33,7 @@ layout: default
   by {{ site.author.name }}
 </span>
 
-{% include social-sharing.html %}
-{% include comments.html %}
+{% unless page.draft %}
+  {% include social-sharing.html %}
+  {% include comments.html %}
+{% endunless %}

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Building an image files picker with Aurelia"
 tags: [Aurelia, JS, TypeScript, Web]
 image:

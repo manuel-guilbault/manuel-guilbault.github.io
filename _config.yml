@@ -16,11 +16,28 @@ collections:
     permalink:       /drafts/:title/
   talks:
     output:          true
-    permalink:       /talks/:year/:month/:day/:title/
+    permalink:       /talks/:title/
   publications:
     output:          false
   friends:
     output:          false
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "post_drafts"
+    values:
+      layout: "post"
+      draft: true
+  - scope:
+      path: ""
+      type: "talks"
+    values:
+      layout: "talk"
 
 # ID & 3rd parties integration
 author:

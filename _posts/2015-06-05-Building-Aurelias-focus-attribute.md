@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Building Aurelia's focus attribute"
 tags: [Aurelia, JS, Web]
 image:
