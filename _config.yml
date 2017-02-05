@@ -5,10 +5,14 @@ description:         ""
 baseurl:             ""
 url:                 "http://manuelguilbault.com"
 paginate:            5
+future:             false
 collections:
   posts:
     output:          true
     permalink:       /blog/:year/:month/:day/:title/
+  drafts:
+    output:          true
+    permalink:       /drafts/:title/
   talks:
     output:          true
     permalink:       /talks/:year/:month/:day/:title/
