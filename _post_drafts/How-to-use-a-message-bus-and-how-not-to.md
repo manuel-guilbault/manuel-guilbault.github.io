@@ -18,11 +18,11 @@ Sometime last week, a couple of collegues and I were discussing what we envision
 for the system's architecture in the mid-long term. Some of them brought up
 introducing a message bus to enable asynchronous processing.
 The way my teammates seemed to see it, a message bus would magically fix
-performance problems. I disagreeed.
+performance problems. I disagreed. This post aims to document my reflection on the subject.
 
 ## The context
 
-We work together on a reservation system for a world-leading tour operator. The
+The team I work with maintains and evolves a reservation system for a world-leading tour operator. The
 system is built using .NET technologies and exposes web APIs allowing various web 
 sites to search for flights and to book seats, along with a back office allowing
 the company's staff to manage flights, capacity and pricing.
@@ -34,8 +34,8 @@ layers:
 ![Layers]({{ site.baseurl }}/images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Layers.svg)
 
 Monolith, for two very distinct reasons. First, the classes making those layers are 
-most of the time tightly coupled together, meaning that it is impossible to change the
-composition of the system without changing the code. Second, the boundaries between
+most of the time tightly coupled together, meaning that it's impossible to change the system's
+behavior simply by recomposing its classes. The code must always be changed. Second, the boundaries between
 the functional domains are sometimes blurry, often unexistant. The system is
 a [Big Ball of Mud](http://www.laputan.org/mud/){:target="_blank"} in all of its glory.
 
@@ -106,8 +106,27 @@ both ways.
 
 ## When is a message bus relevant?
 
-For me, a message bus really shines when it is used to let other parts of
-the system - or even other systems - know that something *just happened*.
+For me, a message bus really shines when they solve two types of problems:
+* to let other parts of the system - or even other systems - know that something *just happened*,
+* to queue long-running tasks that are asynchronous by nature.
+
+Let me explain.
+
+### Eventually consistent side effects
+
+A command is made of:
+* An optional set of pre-conditions (in what state must the system be for the command to be executed),
+* One or more side effects (the state mutations applied to the system).
+
+Sometimes, a command's side effects must be logically atomic with its pre-conditions. This means that
+the system's state can't mutate between the evaluation of the pre-conditions and the application of the
+side effects. For example, when the system's state is stored using a relational database, this is performed 
+using a transaction.
+
+There are however some side effects which . 
+
+
+
 
 A command's side effects can be asynchronously applied only if they support 
 [eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency){:target="_blank"}. 
@@ -117,11 +136,15 @@ it can't be processed asynchronously.
 This forces developers to explicitely define the system's commands, their
 side effects, and the consistency model of each side effect.
 
+### Long running tasks
+
+
+
 ## Summary
 
 A message bus is not a silver bullet. It adds complexity to a system, and
 must be used when it adds real value. In short:
 
-* Don't use it as an over-complex call stack
-* Use it to notify the outside world (other systems or bounded contexts) that something *already* happened
-* Use it for side-effects that can be eventually consistent
+* Use it to notify the outside world (other systems or bounded contexts) that something *already* happened,
+* Use it for side-effects that can be eventually consistent,
+* Use it to asynchronously process long-running, CPU or memory intensive tasks.
