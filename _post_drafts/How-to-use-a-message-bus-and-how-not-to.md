@@ -90,7 +90,7 @@ architecture.
 
 We could say that queries would bypass the whole bus layer, and would be sent
 synchronously by the presentation layer to the business layer, and that commands
-would be sent asynchronously through the bus layer.
+would be sent asynchronously through the bus layer:
 
 ![Bypasing the bus layer]({{ site.baseurl }}/images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Bypassing-the-bus-layer.svg)
 
@@ -114,27 +114,43 @@ Let me explain.
 
 ### Eventually consistent side effects
 
-A command is made of:
-* An optional set of pre-conditions (in what state must the system be for the command to be executed),
-* One or more side effects (the state mutations applied to the system).
+A command is typically made of:
+* An optional set of pre-conditions (in what state must the system be to allow execution of the command),
+* One or more side effects (what mutations are applied to the system).
 
 Sometimes, a command's side effects must be logically atomic with its pre-conditions. This means that
 the system's state can't mutate between the evaluation of the pre-conditions and the application of the
-side effects. For example, when the system's state is stored using a relational database, this is performed 
+side effects. For example, when the system's state is stored using a relational database, this can be performed 
 using a transaction.
 
-There are however some side effects which . 
+There are however some side effects which can be [eventually consistent](https://en.wikipedia.org/wiki/Eventual_consistency){:target="_blank"}.
+Such side effects can tolerate some form of delay between the execution of the rest of the command and their own execution.
 
+#### Redesigning the monolith
 
+To illustrate this, let's redesign a small chunk of our monolith app, by separating flight management concerns and booking
+concerns in two (what out for the buzzword) micro-services.
 
+When a user configures a new flight in the system, the booking engine, which is used by the client-facing websites to book seats, 
+could be notified of the availability of the new flight asynchronously. From a business and domain perspective, there's no need to update 
+this engine's data in the same transaction as the configuration command executed on the flight management module.
 
-A command's side effects can be asynchronously applied only if they support 
-[eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency){:target="_blank"}. 
-If a command's side effect must be in the same logical transaction as its command, 
-it can't be processed asynchronously.
+This type of scenario is perfect for a message bus:
 
-This forces developers to explicitely define the system's commands, their
-side effects, and the consistency model of each side effect.
+![Eventual consistency between bounded contexts]({{ site.baseurl }}/images/posts/2017-02-06-How-to-use-a-message-bus-and-how-not-to/Eventual-consistency.svg)
+
+With the new design, the user sends a command to the flight management service. The module first evaluates the command's pre-conditions:
+it makes sure that the flight number provided by the user is unique, and that the departure time is in a predefined range of time (I wouldn't
+buy tickets for a flight that takes off at 3 in the morning).
+
+Next, the module updates its own state. This side-effect must be on the same transaction as the evaluation of the pre-conditions,
+because the pre-conditions checked for data uniqueness.
+
+Once this is done, the service sends an event on a message bus, and can then return a positive response to the user, because the
+other side effect is processed asynchronously: the booking engine will eventually become consistent, by grabbing the event sent on the 
+bus at its own speed and adding the newly configured flight to its own local state, so customers can book seats on it.
+
+Eventually consistent side effects are not limited to data update: it can be an email or text message notification, for example.
 
 ### Long running tasks
 
