@@ -164,3 +164,5 @@ must be used when it adds real value. In short:
 * Use it to notify the outside world (other systems or bounded contexts) that something *already* happened,
 * Use it for side-effects that can be eventually consistent,
 * Use it to asynchronously process long-running, CPU or memory intensive tasks.
+
+https://martinfowler.com/articles/201701-event-driven.html
