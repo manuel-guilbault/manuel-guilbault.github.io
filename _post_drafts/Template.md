@@ -7,6 +7,6 @@ image:
   teaser: sewing-teaser.jpg
   credit:
   creditlink:
-published : false
+published : true
 --- 
 
