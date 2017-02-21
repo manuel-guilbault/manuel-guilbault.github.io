@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Presenting aurelia-telemetry"
-tags: [Aurelia, JS, TypeScript, Web]
+tags: [Aurelia, JS, Web]
 image:
   feature: "aurelia-main-logo.svg"
   teaser: "aurelia-main-logo.svg"
@@ -9,7 +9,7 @@ published : true
 --- 
 
 Adding telemetry to an Aurelia application is a tedious and repeatable task, at least when it comes to
-bootstrapping and integrating it with the framework. This is the problem the 
+bootstrapping and integrating with the framework. This is what the 
 [`aurelia-telemetry`](https://github.com/manuel-guilbault/aurelia-telemetry) plugin intends to solve.
 
 ## Features
@@ -17,18 +17,20 @@ bootstrapping and integrating it with the framework. This is the problem the
 The plugin defines an abstraction for a telemetry client, and integrates it with Aurelia so all different 
 kinds of telemetry are automatically gathered:
 
-* Logical page views
-* Unhandled errors
-* Logs
+* **Logical page views**: by integrating with `aurelia-router`, the plugin is able to track when a user 
+  navigates to a route.
+* **Unhandled errors**: by listening for the `error` event on the `window` object, the plugin is able
+  to track unhandled errors.
+* **Logs**: by integrating with `aurelia-logging`, the plugin is able to track log messages.
 
 Additionally, the plugin defines a `trackEvent` binding behavior, which can be added to any `.delegate`,
-`.trigger`, or `.call` binding, so a custom event is tracked when the binding is triggered:
+`.trigger`, or `.call` binding, so a custom event can be tracked when the binding is triggered:
 
 ```html
 <button click.delegate="doSomething() & trackEvent:'something-happened'">Do something</button>
 ```
 
-Here, each time the button is clicked, a `'something-happened'` event will be tracked.
+Here, a `'something-happened'` custom event is tracked each time the button is clicked.
 
 The binding behavior can also be passed an object containing additonal properties as its second parameter,
 and this object will be sent to the telemetry client along with the event name:
@@ -39,15 +41,16 @@ and this object will be sent to the telemetry client along with the event name:
 
 ## Adapters
 
-The plugin doesn't contain a specific telemetry client. Instead, it just defines a `TelemetryClient` abstract class.
-This means you can plug an adapter for your favorite telemetry framework. Alternatively, you can use one of the
-existing adapters already provided:
+The plugin doesn't contain any specific telemetry client. Instead, it just defines a `TelemetryClient` abstract class,
+which you can extend into an adapter for your favorite telemetry framework. Alternatively, you can use one of the
+existing adapters, provided as additional plugins:
 
 * [`aurelia-telemetry-application-insights`](https://github.com/manuel-guilbault/aurelia-telemetry-application-insights)
 * [`aurelia-telemetry-google-analytics`](https://github.com/manuel-guilbault/aurelia-telemetry-google-analytics)
-* aurelia-telemetry-piwik (coming soon)
+* `aurelia-telemetry-piwik` (coming soon)
+* `aurelia-telemetry-logstash` (coming soon)
 
 ## Contributing
 
-Help is welcome, so if you want to create an adapter for another telemetry tool, or propose a new feature, don't hesitate
-to either send a pull request or [open discussion](https://github.com/manuel-guilbault/aurelia-telemetry/issues/new).
+Of course, help is welcome. If you want to create an adapter for another telemetry provider, or propose a new feature, don't hesitate
+to either send a pull request or [engage discussion](https://github.com/manuel-guilbault/aurelia-telemetry/issues/new).
