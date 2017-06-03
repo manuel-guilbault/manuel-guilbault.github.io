@@ -9,10 +9,11 @@ published : true
 ---
 
 I've been using [Aurelia](http://aurelia.io/){:target="_blank"} to write multiple applications of 
-various size for more than a year now, and I thought it might interest some people to have some feedback.
+various size for more than a year now, and I thought it might be interesting for some people to get 
+some real-life feedback.
 
 All in all, the framework is awesome. The developer experience is much better with Aurelia than with 
-other frameworks I've used (\**cough*\* Angular \**cough*\*): the framework is flexible, extensible, 
+other frameworks I've used (\**cough*\* Angular \**cough*\*). The framework is flexible, extensible, 
 and very little intrusive. You don't have to fight with it to do things the right way, whatever that
 right way is.
 
@@ -105,7 +106,7 @@ Whenever possible, it is best to write multiple small applications over writing 
 A small code base is more manageable than a large one, and it's easier to have multiple small teams 
 maintaining multiple small applications than one huge team working on a single huge code base.
 Small applications can be released independently and at different paces, while releasing huge apps
-require much more planification between team members and features, and such a process is much less
+require much more planification and coordination between team members, and such a process is much less
 agile.
 
 I didn't invent anything here; microservices have been around long enough now, and they are based on the
@@ -128,9 +129,15 @@ are extremely useful to organize your code.
 For example, I often have a `validation` feature in my Aurelia applications. This feature handles
 some simple tasks related to form validation:
 
-* It loads the `aurelia-validation` plugin,
-* It registers at least one `ValidationRenderer` in the DI container,
-* It registers any custom validation rules needed across the application.
+* It loads the 
+  [`aurelia-validation`](http://aurelia.io/hub.html#/doc/article/aurelia/validation/latest/validation-basics){:target="_blank"}
+  plugin,
+* It registers at least one 
+  [`ValidationRenderer`](http://aurelia.io/hub.html#/doc/article/aurelia/validation/latest/validation-basics/7){:target="_blank"}
+  in the DI container,
+* It registers any
+  [custom validation rules](http://aurelia.io/hub.html#/doc/article/aurelia/validation/latest/validation-basics/10){:target="_blank"}
+  needed across the application.
 
 Features can also be used to group components, models, and services related to specific domains.
 
@@ -139,20 +146,22 @@ dedicated to this subject.
 
 ## Decompose
 
-A route component which fetches data from an HTTP endpoint and renders a complex view itself will
-likely be hard to maintain, as it has too many responsibilities, and makes it hard - or even impossible -
+A route component which fetches data from an HTTP endpoint and renders a complex view all by itself will
+likely be hard to maintain, as it has too many responsibilities. It also makes it hard - or even impossible -
 to reuse parts of its behavior or UI elements.
 
-Components should be **loosely coupled** and **highly cohesive**. They should be small and do a simple
-task. Larger components should be composed of smaller ones.
+Components should be **loosely coupled** and **highly cohesive**. They should be small and solve a 
+well-defined problem. Larger components should be composed of smaller ones, and their task should be
+to configure and coordinate interactions between their constituents.
 
 A lot of Aurelia's features can be of great help in decomposing components and making them flexible
-enough to be used in larger components: one-way and two-way data-binding, content
-projection, and template injection are the cornerstones of well-taylored components.
+enough to be used in larger components: one-way and two-way data-binding, event aggregation,
+content projection, and template injection, are the cornerstones of well-taylored components.
 
 ## Separate UI & domain concerns
 
-Similarly, keep UI artifacts and domain artifacts separated in your code base.
+Similarly, keeping UI and domain artifacts separated in your code base will make it easier
+to maintain.
 
 **UI artifacts** are:
 
@@ -168,17 +177,17 @@ Similarly, keep UI artifacts and domain artifacts separated in your code base.
 * Domain services,
 * HTTP clients.
 
-For example, route components should be built by composing UI elements and domain artifacts together.
-If it fetches its own data from an HTTP endpoint, defines its own model for its data and has a complex
+For example, a route component should be built by composing UI and domain artifacts together.
+If it fetches its own data from an HTTP endpoint, defines its own model for this data and has a complex
 template to present this data to the user, it will likely be hard to maintain and its constituents
 impossible to reuse. Additionally, domain intelligence will be lost in UI concerns.
 
 However, if you define distinct domain models and HTTP services, isolated from UI components, then
-aggregate them all in a route component, the component will be smaller, will only coordinate interactions
-between its constituents, and your code will likely be more sane and easier to understand.
+aggregate them all in a route component, this route component will be smaller, will simply coordinate 
+interactions between its constituents, and your code will likely be more sane and easier to understand.
 
 ## Have fun!
 
 I had a lot of fun it the last year working with Aurelia. I hope you do too!
 
-Don't hesitate to let me know about your own experience with Aurelia by leaving a comment. ☺
+Don't hesitate to let me know about your own experience with Aurelia by leaving a comment ☺
