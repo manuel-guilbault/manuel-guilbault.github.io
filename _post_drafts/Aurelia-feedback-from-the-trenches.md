@@ -165,7 +165,7 @@ sure you master each of those techniques well enough, so you can make enlightene
 Similarly, keeping UI and domain artifacts separated in your code base will make it easier
 to maintain.
 
-**UI artifacts** are:
+By **UI artifact**, I mean:
 
 * Components,
 * Custom elements & attributes,
@@ -173,7 +173,7 @@ to maintain.
 * Binding behaviors,
 * Templates.
 
-**Domain artifacts** are:
+By **Domain artifact**, I mean:
 
 * Domain models,
 * Domain services,
