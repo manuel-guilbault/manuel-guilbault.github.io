@@ -13,9 +13,9 @@ various size for more than a year now, and I thought it might be interesting for
 some real-life feedback.
 
 All in all, the framework is awesome. Aurelia's developer experience is much better than that of
-other frameworks I've worked with (\**cough*\* Angular \**cough*\*). The framework is flexible, 
+other frameworks I've worked with (\**cough*\* Angular \**cough*\*). It's flexible, 
 extensible, and very little intrusive. You don't have to fight it to do things the right way, whatever 
-that right way is.
+that right way might be.
 
 However, entropy is constantly at work, and things can quickly become messy if you don't pay attention.
 Here are a few things I've learnt along the way.
@@ -57,12 +57,14 @@ function getFullName(user: User) {
 }
 ```
 
-It is now pretty clear that the `user` argument is an instance of the `User` class.
+It is now pretty clear that the `user` argument is an instance of the `User` class. Additionally, most 
+modern IDEs will let you to navigate to the definition of `User` in a single click.
 
 The type system also prevents a whole class of bugs, where some part of the code uses something -
-a variable, method, function, or parameter - the wrong way. In plain JS, such bugs must be
-covered by unit tests. In TypeScript, the transpiler will complain about such a misuse if things are properly
-typed. The type system can completely replace a whole category of unit tests.
+a variable, method, function, or parameter - the wrong way - call an undefined method, or assign a value
+to an unexisting property, for example. In plain JS, such bugs must be covered by unit tests. In TypeScript,
+the transpiler will complain about such a misuse if things are properly typed. The type system can completely 
+replace a whole category of unit tests.
 
 Let's imagine the following code:
 ```typescript
@@ -86,12 +88,12 @@ writing unit tests.
 
 ### Everything, really?
 
-Yes. Everything. For examples:
+Yes. Everything. For example:
 
-* Create an interface for the route parameters passed to the `activate` method of a route component,
-* Specify the type of the `@bindable` properties of a custom element,
-* Use typed events published through the `EventAggregator`,
-* Use classes or interfaces for objects fetched using the `fetch` client,
+* Create an interface for the route parameters passed to the `activate` method of route components,
+* Specify the type of the `@bindable` properties of custom elements or attributes,
+* Use typed events when working with the `EventAggregator`,
+* Use classes or interfaces for objects sent or retrieved using the `fetch` client,
 * Didn't I say everything?
 
 By typing everything, you eliminate a whole category of bugs. Additionally, you add documentation
@@ -103,12 +105,12 @@ Or don't, and try it for yourself. You'll see.
 
 ## Small apps over big apps
 
-Whenever possible, it is best to write multiple small applications over writing one huge application.
+Whenever possible, it's better to write multiple small applications over writing one huge application.
 A small code base is more manageable than a large one, and it's easier to have multiple small teams 
 maintaining multiple small applications than one huge team working on a single huge code base.
 Small applications can be released independently and at different paces, while releasing huge apps
-require much more planification and coordination between team members, and such a process is much less
-agile.
+require much more planification and coordination between team members, and such a process is most of
+the time rigid and not agile at all.
 
 I didn't invent anything here; microservices have been around long enough now, and they are based on the
 same principles.
@@ -121,6 +123,10 @@ application loads faster.
 For example, if your application's users are segregated in roles, you can group features 
 in role-based bundles. This way, a given user would load only the bundle(s) he needs to do his job
 based on its role(s).
+
+If you won't reap the benefits of small code bases - faster and independent release cycles, smaller
+teams, reduced code complexity - at least you won't hurt too much your users' experience by forcing them
+to load a 10 MB bundle when all they need really is 10% of it.
 
 ## Organize by features
 
@@ -157,8 +163,9 @@ to configure and coordinate interactions between their constituents.
 
 A lot of Aurelia's features can be of great help in decomposing components and making them flexible
 enough to be used in larger components: one-way and two-way data-binding, event aggregation,
-content projection, and template injection, are the cornerstones of well-taylored components. Make
-sure you master each of those techniques well enough, so you can make enlightened design decisions.
+content projection, and template injection, are the cornerstones of well-taylored and highly
+configurable components. Make sure you master each of those techniques well enough, so you can make
+enlightened design decisions and use Aurelia to its full potential.
 
 ## Separate UI & domain concerns
 
@@ -177,17 +184,23 @@ By **Domain artifact**, I mean:
 
 * Domain models,
 * Domain services,
-* HTTP clients.
+* Back-end clients.
 
 For example, a route component should be built by composing UI and domain artifacts together.
 If it fetches its own data from an HTTP endpoint, defines its own view model for this data and has a complex
-template to present this data to the user, it will likely be hard to maintain and its constituents
+template to present it to the user, it will likely be hard to maintain and its constituents
 impossible to reuse. Additionally, domain intelligence will be lost in UI concerns.
 
 However, if you design distinct domain models and services, isolated from UI components, then
 aggregate them all in a route component, this route component will be smaller because it will simply coordinate 
 interactions between its domain and UI constituents. Plus, your code will likely be saner and easier to 
 understand.
+
+Again, it didn't invent anything here. This idea comes from both
+[Domain-Driven Design](http://dddcommunity.org/){:target="_blank"}
+and [Hexagonal architecture](http://alistair.cockburn.us/Hexagonal+architecture){:target="_blank"},
+and has been around for years. Even though people apply this to back-end design most of the
+time, front-end application design can also greatly benefit from those principles.
 
 ## Have fun!
 
