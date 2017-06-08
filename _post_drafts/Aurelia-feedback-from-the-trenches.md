@@ -12,10 +12,10 @@ I've been using [Aurelia](http://aurelia.io/){:target="_blank"} to write multipl
 various size for more than a year now, and I thought it might be interesting for some people to get 
 some real-life feedback.
 
-All in all, the framework is awesome. The developer experience is much better with Aurelia than with 
-other frameworks I've used (\**cough*\* Angular \**cough*\*). The framework is flexible, extensible, 
-and very little intrusive. You don't have to fight with it to do things the right way, whatever that
-right way is.
+All in all, the framework is awesome. Aurelia's developer experience is much better than that of
+other frameworks I've worked with (\**cough*\* Angular \**cough*\*). The framework is flexible, 
+extensible, and very little intrusive. You don't have to fight it to do things the right way, whatever 
+that right way is.
 
 However, entropy is constantly at work, and things can quickly become messy if you don't pay attention.
 Here are a few things I've learnt along the way.
@@ -23,11 +23,12 @@ Here are a few things I've learnt along the way.
 ## Type everything
 
 If you don't use [TypeScript](https://www.typescriptlang.org/){:target="_blank"} yet, you really should.
-Its type system adds tremedous value to any code base.
+Its type system adds tremedous value when compared to plain JS.
 
 ### Why?
 
-First, it serves as API documentation for the developers. Let's imagine the following JS code snippet:
+First, it serves as API documentation for the developers working on your code base. Let's imagine the 
+following JS code snippet:
 
 ```js
 export class User {
@@ -42,9 +43,9 @@ function getFullName(user) {
 }
 ```
 
-Check the `getFullName` function. What is this `user` parameter? What are its properties and methods?
-Here, we can guess that it is a `User` instance. However, if the class and the function live in distinct 
-files or directories, this guess becomes questionable.
+Check the `getFullName` function. What is the expected type of this `user` parameter? Is it an object or 
+something else? What are its properties and methods? Here, we can probably guess that it is a `User` 
+instance. However, if the class and the function live in distinct files or directories, good luck with that.
 
 Exploring such a JS code base can be a nightmare, as you would need to search for calls to `getFullName` 
 to try to figure out what parameters are passed to it. The type system makes understanding existing code
@@ -87,10 +88,10 @@ writing unit tests.
 
 Yes. Everything. For examples:
 
-* The route parameters passed to the `activate` method of a route component,
-* The `@bindable` properties of a custom element,
-* Events published through the `EventAggregator`,
-* Objects fetched using the `fetch` client,
+* Create an interface for the route parameters passed to the `activate` method of a route component,
+* Specify the type of the `@bindable` properties of a custom element,
+* Use typed events published through the `EventAggregator`,
+* Use classes or interfaces for objects fetched using the `fetch` client,
 * Didn't I say everything?
 
 By typing everything, you eliminate a whole category of bugs. Additionally, you add documentation
@@ -146,7 +147,7 @@ dedicated to this subject.
 
 ## Decompose
 
-A route component which fetches data from an HTTP endpoint and renders a complex view all by itself will
+A route component fetching data from an HTTP endpoint and rendering a complex view all by itself will
 likely be hard to maintain, as it has too many responsibilities. It also makes it hard - or even impossible -
 to reuse parts of its behavior or UI elements.
 
@@ -156,7 +157,8 @@ to configure and coordinate interactions between their constituents.
 
 A lot of Aurelia's features can be of great help in decomposing components and making them flexible
 enough to be used in larger components: one-way and two-way data-binding, event aggregation,
-content projection, and template injection, are the cornerstones of well-taylored components.
+content projection, and template injection, are the cornerstones of well-taylored components. Make
+sure you master each of those techniques well enough, so you can make enlightened design decisions.
 
 ## Separate UI & domain concerns
 
@@ -178,16 +180,17 @@ to maintain.
 * HTTP clients.
 
 For example, a route component should be built by composing UI and domain artifacts together.
-If it fetches its own data from an HTTP endpoint, defines its own model for this data and has a complex
+If it fetches its own data from an HTTP endpoint, defines its own view model for this data and has a complex
 template to present this data to the user, it will likely be hard to maintain and its constituents
 impossible to reuse. Additionally, domain intelligence will be lost in UI concerns.
 
-However, if you define distinct domain models and HTTP services, isolated from UI components, then
-aggregate them all in a route component, this route component will be smaller, will simply coordinate 
-interactions between its constituents, and your code will likely be more sane and easier to understand.
+However, if you design distinct domain models and services, isolated from UI components, then
+aggregate them all in a route component, this route component will be smaller because it will simply coordinate 
+interactions between its domain and UI constituents. Plus, your code will likely be saner and easier to 
+understand.
 
 ## Have fun!
 
-I had a lot of fun it the last year working with Aurelia. I hope you do too!
+I had a lot of fun in the last year working with Aurelia. I hope you do too!
 
-Don't hesitate to let me know about your own experience with Aurelia by leaving a comment ☺
+Don't hesitate to let me know about your own experience with Aurelia. Just leave a comment! ☺
