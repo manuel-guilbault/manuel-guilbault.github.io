@@ -30,7 +30,7 @@ Its type system adds tremedous value when compared to plain JS.
 First, it serves as API documentation for the developers working on your code base. Let's imagine the 
 following JS code snippet:
 
-```js
+```javascript
 export class User {
   constructor(firstName, lastName) {
     this.firstName = firstName;
@@ -51,7 +51,7 @@ Exploring such a JS code base can be a nightmare, as you would need to search fo
 to try to figure out what parameters are passed to it. The type system makes understanding existing code
 much easier:
 
-```ts
+```typescript
 function getFullName(user: User) {
   return `${user.firstName} ${user.lastName}`;
 }
@@ -67,6 +67,7 @@ the transpiler will complain about such a misuse if things are properly typed. T
 replace a whole category of unit tests.
 
 Let's imagine the following code:
+
 ```typescript
 export class User {
   constructor(public firstName: string, public lastName: string) {}

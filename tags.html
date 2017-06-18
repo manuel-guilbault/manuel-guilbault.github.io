@@ -3,10 +3,10 @@ layout: page
 title: Tags
 ---
 
-<ul class="tags">
+<ul class="tag-links">
   {% for tag in site.tags %}
     <li>
-      <a href="#{{ tag[0] | slugify }}" class="tag">
+      <a href="#{{ tag[0] | slugify }}" class="tag-link">
         #{{ tag | first }}&nbsp;<span class="badge">{{ tag | last | size}}</span>
       </a>
     </li>

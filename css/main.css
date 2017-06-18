@@ -320,7 +320,7 @@ pre > code {
 /*
   Tags
 */
-.tag {
+.tag-link {
   color: #999;
   font-size: 1rem;
   padding-right: 0.3rem;
@@ -329,17 +329,17 @@ pre > code {
   font-family: "Quattrocento Sans", sans-serif;
 }
 
-a.tag:hover {
+a.tag-link:hover {
   text-decoration: none; 
   color: black;
 }
 
-ul.tags {
+ul.tag-link {
   padding: 0px;
   list-style: none;
 }
 
-ul.tags li {
+ul.tag-link li {
   list-style-type: none;
   display: inline;
 }
@@ -362,7 +362,7 @@ a:hover .badge {
   background-color: black;
 }
 
-.tag .badge {
+.tag-link .badge {
   margin-left: -0.1em;
   margin-right: 0.5em;
 }

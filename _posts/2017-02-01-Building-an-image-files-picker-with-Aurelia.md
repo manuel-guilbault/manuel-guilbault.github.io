@@ -24,7 +24,7 @@ an `<input type="file">` element:
 
 `resources/elements/file-picker.ts`:
 
-```ts
+```typescript
 import {customElement, useView, bindable, bindingMode} from 'aurelia-framework';
 
 @customElement('file-picker')
@@ -107,7 +107,7 @@ element into a file drag and drop target:
 
 `resources/attributes/file-drop-target.ts`:
 
-```ts
+```typescript
 import {customAttribute, bindingMode, autoinject} from 'aurelia-framework';
 
 @customAttribute('file-drop-target', bindingMode.twoWay)
@@ -184,7 +184,7 @@ The best way to do this in Aurelia is with a value converter:
 
 `resources/value-converters/chunk.ts`:
 
-```ts
+```typescript
 import {valueConverter} from 'aurelia-framework';
 
 @valueConverter('chunk')
@@ -228,7 +228,7 @@ points. That's why we will create a custom attribute instead:
 
 `resources/attributes/blob-src.ts`:
 
-```ts
+```typescript
 import {customAttribute, inject} from 'aurelia-framework';
 
 @customAttribute('blob-src')
@@ -328,7 +328,7 @@ up the DOM triggers a call to the `addSelectedFiles` method. The
 
 `resources/elements/image-files-picker.ts`:
 
-```ts
+```typescript
 import {customElement, useView, bindable, bindingMode} from 'aurelia-framework';
 
 @customElement('image-files-picker')
@@ -383,7 +383,7 @@ view-model:
 
 `app.ts`:
 
-```ts
+```typescript
 export class App {
   files: File[] = [];
 }
@@ -429,7 +429,7 @@ Aurelia's Fetch client and the `FormData` class from the Fetch API.
 Here's an example of a client service used to upload an array of `File` instances
 to some remote endpoint:
 
-```ts
+```typescript
 import {autoinject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 

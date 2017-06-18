@@ -14,13 +14,13 @@ country had specific features that were enabled and rules that were applied only
 The previous programmers had used a very naive approach to solve this problem: they tested 
 the user's country ID:
 
-{% highlight csharp %}
+```csharp
 if (user.Country.ID == 1)
 {
     // Show a button available only for country #1
     // By the way, country #1 is France for the sake of this example
 }
-{% endhighlight %}
+```
 
 The app ended up being full of those ugly checks. Plus, if you don't know the countries and 
 their IDs and don't have the database table under hand, good luck trying to figure out what 
@@ -31,18 +31,18 @@ users of which country should see this button.
 I was absolutely not convinced by the first idea that came to my mind, but I decided to give 
 it a try. I created an enum listing the countries:
 
-{% highlight csharp %}
+```csharp
 public enum CountryEnum
 {
     France = 1,
     Canada = 2,
     // and so on
 }
-{% endhighlight %}
+```
 
 Then I added a method to the Country entity:
 
-{% highlight csharp %}
+```csharp
 public class Country
 {
     // snip...
@@ -54,17 +54,17 @@ public class Country
 
     // snip...
 }
-{% endhighlight %}
+```
 
 And the checks turned into:
 
 
-{% highlight csharp %}
+```csharp
 if (user.Country.ToEnum() == CountryEnum.France)
 {
     // Show a button available only for France
 }
-{% endhighlight %}
+```
 
 Well... it was a little better. It was much easier to see what features and rules applied 
 to which country. But it still sucked. Mainly because it was hard to change. Imagine 
@@ -86,7 +86,7 @@ needs), could be applied in a dynamic context like mine.
 
 So I rolled all my changes back, and started from scratch:
 
-{% highlight csharp %}
+```csharp
 public class CountryFeatures
 {
     public bool CanDoThis { get; private set; }
@@ -94,11 +94,11 @@ public class CountryFeatures
     public bool MustConfirmBeforeThatAction { get; private set; }
     // and so on for every country-specific feature or rule
 }
-{% endhighlight %}
+```
 
 You get the idea for the next step, I guess:
 
-{% highlight csharp %}
+```csharp
 public class Country
 {
     // snip...
@@ -107,20 +107,19 @@ public class Country
 
     // snip...
 }
-{% endhighlight %}
+```
 
 How I initialized the Features property for each country is not relevant to this article: 
 you could store the feature switches for each country in a database table, in a 
-configuration file, or even hard-code them for all I care (although this solution kind of 
-defeats the purpose of removing hard-coded country references - but not completely). 
+configuration file, or even hard-code them for all I care. 
 What's important is that the feature checks were now much clearer:
 
-{% highlight csharp %}
+```csharp
 if (user.Country.Features.CanDoThis)
 {
     // Show the button used to do this
 }
-{% endhighlight %}
+```
 
 Now that is a much better solution. The single responsibility principle is respected: 
 the view only needs to know if a given feature is enabled or not to decide if it must 
