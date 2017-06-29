@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Multiple Aurelia apps in a single ASP.NET Core application"
-tags: [Aurelia, JS, Web, dotNet]
+tags: [Aurelia, JS, Web, .NET]
 image:
   feature: "aurelia-main-logo.svg"
   teaser: "aurelia-main-logo.svg"
