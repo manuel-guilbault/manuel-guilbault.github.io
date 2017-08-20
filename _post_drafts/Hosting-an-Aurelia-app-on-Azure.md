@@ -112,7 +112,7 @@ fill the form:
 * *Hosting Plan:* select `Consumption Plan` to get 1 million free executions per month (true at the moment of writing).
 * All other properties can keep their default values.
 
-[![Fill the form](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-function-app.PNG)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-function-app.PNG){:target="_blank"}
+[![Fill the form](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-function-app.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-function-app.png){:target="_blank"}
 
 You can next click on `Create`.
 
