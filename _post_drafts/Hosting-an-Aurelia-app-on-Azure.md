@@ -23,9 +23,10 @@ For sites than have less than a million visits per month, this setup will likely
 a couple of euros per month. This is because Blob storage is really cheap, and Azure Functions, when using
 the consumption plan, come with a million of free executions per month.
 
-You can use [this Aurelia application](https://github.com/manuel-guilbault/blog-post-aurelia-azure) if you want to follow along.
+You can use [this Aurelia application](https://github.com/manuel-guilbault/blog-post-aurelia-azure){:target="_blank"}
+if you want to follow along.
 
-> To follow this post, you'll need an [Azure](https://azure.microsoft.com/) subscription.
+> To follow this post, you'll need an [Azure](https://azure.microsoft.com/){:target="_blank"} subscription.
 
 ## Storing files on a Blob storage container
 
@@ -61,7 +62,7 @@ will be created.
 
 ### Uploading the app
 
-> For the next steps, you'll need the [Azure Storage Explorer](http://storageexplorer.com/) installed.
+> For the next steps, you'll need the [Azure Storage Explorer](http://storageexplorer.com/){:target="_blank"} installed.
 
 Scroll left so you see your storage account, and click on the `Open in Explorer` button. This will launch the Azure
 Storage Explorer. Follow the instruction and sign in, so you see your subscription(s) in the explorer's left panel.
@@ -174,5 +175,5 @@ With two very simple proxy functions and a Blob storage container, we now have a
 hosted on Azure, for a very cheap price. Additionally, since our application is accessed through a function app, 
 we can easily add a custom domain and an SSL certificate to our app.
 
-In my next post, I'll show how to use [Visual Studio Team Services](https://www.visualstudio.com/) to 
-automate the build and deployment of an Aurelia application to a Blob storage container. Stay tuned!
+In my next post, I'll show how to use [Visual Studio Team Services](https://www.visualstudio.com/){:target="_blank"}
+to automate the build and deployment of an Aurelia application to a Blob storage container. Stay tuned!
