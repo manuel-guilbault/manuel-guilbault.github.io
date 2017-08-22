@@ -83,7 +83,8 @@ account on the Azure portal and copy it's `Primary blob service endpoint`, which
 `https://manuelguilbault.blob.core.windows.net/`.
 
 To this URL, append the name of the Blob container, followed by `/index.html` (or the name of your application's index file). In my case, the final URL looks like this: `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/index.html`.
- 
+
+If you access this URL in a browser, the `index.html` page should load (check your browser's developer tools to make sure).
 Now, if you used the sample Aurelia application provided at the beginning of this post, or if your own Aurelia app uses the 
 router with push state, your app shouldn't work when you navigate to this URL. This is because Aurelia expects that the
 application is loaded using a default document (without the `index.html` part), so the router can correctly match the
