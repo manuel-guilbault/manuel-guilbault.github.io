@@ -167,7 +167,7 @@ Now click on `Create`.
 
 We now have two proxy functions. The first one, named `root`, will be used to load the `index.html` when accessing
 the root of our function app's domain, and a second one named `default` which will
-simply forward any other requests to the Blob storage container. The first one will be used when loading our Aurelia 
+simply forward any other requests to the Blob storage container. The first one will be used to load our Aurelia 
 application itself, and the second one will kick in when the `index.html` file will load our application's bundles, 
 CSS files or images.
 
