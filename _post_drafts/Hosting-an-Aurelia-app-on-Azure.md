@@ -23,7 +23,7 @@ For sites than have less than a million visits per month, this setup will likely
 a couple of euros per month. This is because Blob storage is really cheap, and Azure Functions, when using
 the consumption plan, come with a million of free executions per month.
 
-You can use [this Aurelia application](https://github.com/manuel-guilbault/blog-post-aurelia-azure){:target="_blank"}
+You can use this [sample Aurelia application](https://github.com/manuel-guilbault/blog-post-aurelia-azure){:target="_blank"}
 if you want to follow along.
 
 > To follow this post, you'll need an [Azure](https://azure.microsoft.com/){:target="_blank"} subscription.
@@ -40,7 +40,8 @@ Start by navigating to your Azure portal.
 
 Go to `New` > `Storage` > `Storage account`. A storage account creation form will show. Fill the following properties:
 
-* *Name:* the name of your Blob storage account. Must be globaly unique.
+* *Name:* the name of your Blob storage account (I used `manuelguilbault` here). Must be globaly unique, as 
+  it will be used in the Blob storage's domain name.
 * *Subscription:* select your Azure subscription.
 * *Resource group:* every Azure artefact must belong to a given resource group. Either select an existing resource group or create one.
 * All other properties can keep their default values.
@@ -48,7 +49,7 @@ Go to `New` > `Storage` > `Storage account`. A storage account creation form wil
 You can next click on `Create`.
 
 Azure is going to work for a little while. Once your Blob storage account has been created, navigate to it
-(you can either search for it in the top search bar, or simply click on the notification). You'll see the following:
+(you can either search for it in the top search bar, or simply click on the success notification). You'll see the following:
 
 [![Blob storage account overview](/images/posts/Hosting-an-Aurelia-app-on-Azure/Blob-storage-account-overview.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Blob-storage-account-overview.png){:target="_blank"}
 
@@ -65,31 +66,33 @@ will be created.
 > For the next steps, you'll need the [Azure Storage Explorer](http://storageexplorer.com/){:target="_blank"} installed.
 
 Scroll left so you see your storage account, and click on the `Open in Explorer` button. This will launch the Azure
-Storage Explorer. Follow the instruction and sign in, so you see your subscription(s) in the explorer's left panel.
+Storage Explorer. Follow the instructions and sign in, so you see your subscription(s) in the explorer's left panel.
 
-In this left panel, expand your subscription, then your storage account and its `Blob Containers` and select your new container. Then, in the container's tab in the center panel, use the `Upload` button to upload the files and folders of the Aurelia application.
+In this left panel, expand your subscription, then your storage account and its `Blob Containers` and select your new container. Then, in the container's tab in the center panel, use the `Upload` button to upload the files and folders of your Aurelia application.
 
 [![Open the blob container in Azure explorer](/images/posts/Hosting-an-Aurelia-app-on-Azure/Open-storage-in-Azure-explorer.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Open-storage-in-Azure-explorer.png){:target="_blank"}
 
-If you upload the sample app provided at the beginning of this post, first make sure you `au build` it before hand, 
-then upload the `scripts` folder, and the `favicon.ico` and `index.html` files.
+If you upload the sample app provided at the beginning of this post, first make sure you `au build` it before hand
+(see its `README.md` file), then upload the `scripts` folder, and the `favicon.ico` and `index.html` files.
 
 ### Accessing the files
 
 Once the app is uploaded to Azure, let's try to access the files from a browser. Go back to your storage 
 account on the Azure portal and copy it's `Primary blob service endpoint`, which is a URL following this pattern:
-`https://<your_storage_account_name>.blob.core.windows.net/`.
+`https://<your_storage_account_name>.blob.core.windows.net/`. In my case, the URL is
+`https://manuelguilbault.blob.core.windows.net/`.
 
 To this URL, append the name of the Blob container, followed by `/index.html` (or the name of your application's index file). In my case, the final URL looks like this: `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/index.html`.
  
 Now, if you used the sample Aurelia application provided at the beginning of this post, or if your own Aurelia app uses the 
-router with push state, your app shouldn't work when you navigate to this URL.
+router with push state, your app shouldn't work when you navigate to this URL. This is because Aurelia expects that the
+application is loaded using a default document (without the `index.html` part), so the router can correctly match the
+`/` path to its `home` route.
 
 ## Using Azure Proxy Functions
 
 Accessing an Aurelia application directly from the Blob storage URL has some severe limitations:
 
-* You can't add a custom domain on top of a Blob storage container.
 * Blob storage doesn't support default documents. This means that accessing a directory path (in my case, 
 `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/`) doesn't serve the `index.html` file in
   the directory, but will return a 404 Not Found response.
@@ -106,10 +109,12 @@ as a proxy for our application.
 In the Azure dashboard, click on `New`, search for `function`, click on `Function App`, then on `Create`. Next, 
 fill the form:
 
-* *App name:* enter the name of your Function app. Must be globaly unique.
+* *App name:* enter the name of your Function app (I named mine `manuelguilbault-blog-post-aurelia-azure`). Must be 
+  globaly unique, as it will be used in the app's domain name.
 * *Subscription:* select your Azure subscription.
-* *Resource Group:* every Azure artefact must belong to a given resource group. Either select an existing resource group or create one.
-* *Hosting Plan:* select `Consumption Plan` to get 1 million free executions per month (true at the moment of writing).
+* *Resource Group:* every Azure artefact must belong to a given resource group. Either select an existing resource group 
+  or create one.
+* *Hosting Plan:* select `Consumption Plan` to get 1 million free executions per month (at the moment of writing).
 * All other properties can keep their default values.
 
 [![Fill the form](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-function-app.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-function-app.png){:target="_blank"}
@@ -132,12 +137,11 @@ click on `Function app settings`. This will open a new tab titled `Function app 
 Navigate to your Function App in the Azure portal, and click on the plus button beside the `Proxies` list item.
 This will display a creation form, which you can fill:
 
-* *Name:* the name of the proxy function. I named it `default`.
+* *Name:* the name of the proxy function. I named mine `default`.
 * *Route template:* the template of the URL path that must be matched for this proxy function to be triggered. 
-  Here, enter `/{*path}`. This pattern will match any path and make it available as a `path` variable.
+  Here, enter `/{*path}`. This pattern will match any path and make it available as a `path` variable to the backend URL.
 * *Backend URL:* the URL to which matching requests will be dispatched. Here, enter the URL of your Blob storage 
-  container, followed by the `{path}` variable output.
-  Ex: `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/{path}`
+  container, followed by the `{path}` variable output. For me, this was `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/{path}`.
 * All other properties can keep their default values.
 
 [![Proxy Function creation form](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-default-proxy-function.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-default-proxy-function.png){:target="_blank"}
@@ -145,29 +149,42 @@ This will display a creation form, which you can fill:
 You can next click on `Create`.
 
 This function will dispatch all requests sent to `https://manuelguilbault-blog-post-aurelia-azure.azurewebsites.net/`
-to my new Blob storage container. However, in order to support loading the `index.html` file when accessing the `/`
-path, we need to create a second proxy function with the following properties:
+to my Blob storage container. However, in order to support default documents, so the `index.html` file is loaded when
+accessing the `/` path, we need to create a second proxy function with the following properties:
 
-* *Name:* I named this one `root`.
+* *Name:* the name of the proxy function. I named this one `root`.
 * *Route template:* this proxy function should match only requests sent to the root, so enter `/`.
 * *Backend URL:* requests sent to the root should return the `index.html` file, so enter URL of your Blob storage 
-  container, followed by `index.html`.
-  Ex: `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/index.html`
+  container, followed by `index.html`. For me, this was
+  `https://manuelguilbault.blob.core.windows.net/blog-post-aurelia-azure/index.html`.
 
 [![Proxy Function creation form](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-root-proxy-function.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Create-root-proxy-function.png){:target="_blank"}
 
-Click on `Create`.
+Now click on `Create`.
 
 ### Testing the application
 
 We now have two proxy functions. The first one, named `root`, will be used to load the `index.html` when accessing
 the root of our function app's domain, and a second one named `default` which will
-simply forward any other requests to the Blob storage container. This second one will kick in when the
-`index.html` file will load our Aurelia application's bundles, CSS files or images.
+simply forward any other requests to the Blob storage container. The first one will be used when loading our Aurelia 
+application itself, and the second one will kick in when the `index.html` file will load our application's bundles, 
+CSS files or images.
 
 To test the application, simply launch a browser tab and navigate to your function app's URL
 (in my case, `https://manuelguilbault-blog-post-aurelia-azure.azurewebsites.net/`). The Aurelia app (or your
-static site) should load properly.
+static site) should load properly now.
+
+### Making the Blob storage container private
+
+Since the Blob storage container is no more accessed directly, but only through a Proxy Function, you can
+make it private to make sure no one can access it directly from the web.
+
+To do this, go back to your Blob storage container in your Azure portal, then click on `Access policy`. You should see
+this form come up:
+
+[![Changing Blob storage container access type](/images/posts/Hosting-an-Aurelia-app-on-Azure/Change-blob-storage-container-access-type.png)](/images/posts/Hosting-an-Aurelia-app-on-Azure/Change-blob-storage-container-access-type.png){:target="_blank"}
+
+Here, simply change the `Public access level` to `Private` and click `Save`.
 
 ## Wrapping things up
 
