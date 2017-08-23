@@ -195,3 +195,5 @@ we can easily add a custom domain and an SSL certificate to our app.
 
 In my next post, I'll show how to use [Visual Studio Team Services](https://www.visualstudio.com/){:target="_blank"}
 to automate the build and deployment of an Aurelia application to a Blob storage container. Stay tuned!
+
+> Thanks to [@NatMarchand](https://twitter.com/natmarchand){:target="_blank"} for the idea!
