@@ -32,7 +32,7 @@ For sites than have less than a million visits per month, this setup will likely
 a couple of euros per month. This is because Blob storage is really cheap, and Azure Functions, when using
 the consumption plan, come with a million of free executions per month.
 
-You can use this [sample Aurelia application](https://github.com/manuel-guilbault/blog-post-aurelia-azure){:target="_blank"}
+You can use this [sample Aurelia application](https://github.com/manuel-guilbault/blog-post-aurelia-azure/releases/tag/2017-08-22-Hosting-an-Aurelia-app-on-Azure){:target="_blank"}
 if you want to follow along.
 
 > To follow this post, you'll need an [Azure](https://azure.microsoft.com/){:target="_blank"} subscription.

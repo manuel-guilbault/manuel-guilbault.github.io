@@ -23,6 +23,9 @@ We also saw how to automate the deployment process of an Aurelia app on Azure us
 However, the current state of the solution doesn't support deep linking if the app uses the router in push state mode.
 In this post, we'll see how to fix this.
 
+You can get the sample Aurelia app I used for this post 
+[here](https://github.com/manuel-guilbault/blog-post-aurelia-azure/releases/tag/2017-12-08-Adding-deep-linking-support-to-Azure-Functions-based-Aurelia-app){:target="_blank"}.
+
 ## Understanding how deep linking works in push state mode
 
 Imagine an Aurelia app deployed on `http://www.my-awesome-app.com/`. Imagine that a user accesses the app and,

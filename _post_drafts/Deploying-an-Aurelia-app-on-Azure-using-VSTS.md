@@ -33,7 +33,7 @@ VSTS to automate the whole deployment process.
 follow the third part of this post.
 
 > You can get the sample Aurelia app I used for this post 
-[here](https://github.com/manuel-guilbault/blog-post-aurelia-azure/){:target="_blank"}.
+[here](https://github.com/manuel-guilbault/blog-post-aurelia-azure/releases/tag/2017-12-01-Deploying-an-Aurelia-app-on-Azure-using-VSTS){:target="_blank"}.
 Additionally, this repository contains some files used for deployment on Azure
 in the `azure` directory. More on this later.
 
