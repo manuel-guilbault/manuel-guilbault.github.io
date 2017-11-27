@@ -171,6 +171,17 @@ and computes the URL to the Storage container for this path using the `Storage.H
 Storage container, the response is piped back to the client. If the Storage container returns a `404 Not Found`,
 the function then falls back to `/index.html` instead.
 
+Lastly, we need to change the `azure/functions-app/host.json` file. By default, Azure Functions HTTP triggers
+will match only routes with the `/api` prefix. We just need to remove this default prefix:
+
+```json
+{
+  "http": {
+    "routePrefix": ""
+  }
+}
+```
+
 If you redeploy this app and give it a try, deep linking should now work.
 
 ## Conclusion

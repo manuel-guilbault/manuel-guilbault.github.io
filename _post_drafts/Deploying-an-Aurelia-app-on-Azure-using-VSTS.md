@@ -480,31 +480,33 @@ Here's the sequence of tasks, along with their properties, to add to the release
 
 | Task type | Property | Value |
 | --------- | -------- | ----- |
-| Azure Resource Group Deployment | Azure subscription | *Select your Azure subscription* |
+| **Azure Resource Group Deployment** | Azure subscription | *Select your Azure subscription* |
 | | Resource group | $(ResourceGroup.Name) |
 | | Location | *Select the location where you want to deploy your app* |
 | | Template | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/deploy/azure/azuredeploy.json |
 | | Override template parameters | -appName $(AppService.Name) |
-| ARM Outputs | Azure Connection Type | Azure Resource Manager |
+| **ARM Outputs** | Azure Connection Type | Azure Resource Manager |
 | | AzureRM Subscription | *Select your Azure subscription* |
 | | Resource Group | $(ResourceGroup.Name) |
 | | Outputs to process | Storage.Account.Name, Storage.Container.Name |
-| Azure File Copy | Source | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/drop/ |
+| **Azure File Copy** | Source | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/drop/ |
 | | Azure Connection Type | Azure Resource Manager |
 | | Azure Subscription | *Select your Azure subscription* |
 | | Destination Type | Azure Blob |
 | | RM Storage Account | $(Storage.Account.Name) |
 | | Container Name | $(Storage.Container.Name) |
 | | Additional Argumenta | /SetContentType |
-| Azure PowerShell | Azure Connection Type | Azure Resource Manager |
+| **Azure PowerShell** | Azure Connection Type | Azure Resource Manager |
 | | Azure Subscription | *Select your Azure subscription* |
 | | Script Type | Script File Path |
 | | Script Path | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/deploy/azure/tools/generate-sas-token.ps1 |
 | | Script Arguments | -ResourceGroup $(ResourceGroup.Name) -StorageAccount $(Storage.Account.Name) -StorageContainer $(Storage.Container.Name) -Permission r -ExportTo Storage.SasToken |
-| Azure App Service Deploy | Azure Subscription | *Select your Azure subscription* |
+| **Azure App Service Deploy** | Azure Subscription | *Select your Azure subscription* |
 | | App Service Name | $(AppService.Name) |
 | | Package or folder | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/deploy/azure/functions-app/ |
-| Azure App Service: Set App settings | AzureRM Subscription | *Select your Azure subscription* |
+| | Publish using Web Deploy | *Check it* |
+| | Remove additional files at destination | *Check it* |
+| **Azure App Service: Set App settings** | AzureRM Subscription | *Select your Azure subscription* |
 | | Azure App Service | $(AppService.Name) |
 | | Resource Group | $(ResourceGroup.Name) |
 | | App Settings | Storage.SasToken='$(Storage.SasToken)' |
