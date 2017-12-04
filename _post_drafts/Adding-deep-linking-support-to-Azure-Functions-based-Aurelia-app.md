@@ -11,7 +11,7 @@ published : true
 In this serie:
 
 1. [Hosting an Aurelia app on Azure](/blog/2017/08/22/Hosting-an-Aurelia-app-on-Azure/)
-2. [Deploying an Aurelia app on Azure using VSTS](/blog/2017/11/29/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
+2. [Deploying an Aurelia app on Azure using VSTS](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
 3. [Adding deep linking support to an Azure Functions-based Aurelia app (this post)](/blog/2017/12/07/Adding-deep-linking-support-to-Azure-Functions-based-Aurelia-app/)
 4. Adding Let's Encrypt to an Azure Functions-based Aurelia app (coming soon)
 
@@ -28,20 +28,22 @@ You can get the sample Aurelia app I used for this post
 
 ## Understanding how deep linking works in push state mode
 
-Imagine an Aurelia app deployed on `http://www.my-awesome-app.com/`. Imagine that a user accesses the app and,
-through the navigation menu, navigates to `http://www.my-awesome-app.com/some-feature` and bookmarks this URL.
+Imagine an Aurelia app that uses the router in push state mode. Imagine this app is deployed on 
+`http://www.my-awesome-app.com/`. Imagine that a user accesses the app and, through the navigation menu, 
+navigates to `http://www.my-awesome-app.com/some-feature` and bookmarks this URL.
 What normally happens when he comes back to this bookmarked URL later?
 
 1. The web server receives a GET request for `/some-feature`.
 2. It searches its file system (or its storage mechanism, whatever it is) for a file matching this path,
    but can't find any matching file.
 4. It returns a `200 OK` response with the content of `/index.html` instead of a `404 Not Found`.
-5. Since the user's browser received `/index.html`, the Aurelia app boots.
+5. Since the user's browser received `/index.html`, the Aurelia app starts.
 6. Since the path of the current URL is `/some-feature` in the user's browser, the Aurelia router 
    loads the component linked to this path. Everything works as expected.
 
-At the moment, our solution doesn't perform step #4 properly. If the proxy app receives a GET request
-for an unknown path, it just returns a `404 Not Found` response. How can we fix that?
+At the moment, our solution doesn't perform step 4 properly. If the proxy app receives a GET request
+for a path not matching a file in the Storage container, it just returns a `404 Not Found` response.
+How can we fix that?
 
 ## Replacing the proxy functions
 
@@ -49,7 +51,7 @@ At the moment of writing, the Azure Functions proxies don't support this type of
 The only solution is to remove the `proxies.json` file and to create a full-fledged Azure Function
 that will act as a proxy and that will implement the fallback mechanism.
 
-In your Aurelia app root directory, create the following file structure:
+In your Aurelia app root directory, adjust the file structure to match the following:
 
 ```
 azure
@@ -85,7 +87,7 @@ Next, put the following snippet in `azure/functions-app/proxy/function.json`:
 ```
 
 This file states that the function will be triggered when the Functions app receives a GET request to
-any path. The function will be passed the HTTP request to its `request` parameter, and will have the
+any path. The function will receive the HTTP request as its `request` parameter, and will have the
 request path available as the `path` context variable.
 
 In `azure/functions-app/proxy/index.js`, put the following code:
@@ -182,14 +184,16 @@ will match only routes with the `/api` prefix. We just need to remove this defau
 }
 ```
 
-If you redeploy this app and give it a try, deep linking should now work.
+You can now redeploy this app (this should be easy if you followed my 
+[previous post](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)).
+If you give it a try, deep linking should now work properly.
 
 ## Conclusion
 
 Solving the deep linking problem was not that complicated. However, it would be pretty neat if 
 the Azure Functions proxies supported this kind of feature (there's already a 
 [feature request](https://github.com/Azure/Azure-Functions/issues/606) for this).
-In the meantime, this work around is a okay enough solution.
+In the meantime, this work around is an okay enough solution.
 
 ## What's next?
 
