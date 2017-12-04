@@ -11,7 +11,7 @@ published : true
 In this serie:
 
 1. [Hosting an Aurelia app on Azure](/blog/2017/08/22/Hosting-an-Aurelia-app-on-Azure/)
-2. [Deploying an Aurelia app on Azure using VSTS (this post)](/blog/2017/11/29/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
+2. [Deploying an Aurelia app on Azure using VSTS (this post)](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
 3. Adding deep linking support to an Azure Functions-based Aurelia app (coming soon)
 4. Adding Let's Encrypt to an Azure Functions-based Aurelia app (coming soon)
 
@@ -80,7 +80,7 @@ and can define `variables`. Of course, it is pretty useless if it doesn't define
 some `resources`. Finally, it can export some `outputs`.
 
 In addition to this structure, a template can use a rich expression syntax to
-access resources' properties, compute values from other, or access variables or
+access resources' properties, compute values from others, or access variables or
 parameters. You can get more familiar with ARM templates by checking the
 [official documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-authoring-templates){:target="_blank"}.
 
@@ -164,10 +164,10 @@ in the description of the resources we wish to deploy:
 
 Simply replace the `variables` object with the previous snippet in the template.
 
-> As a rule of thumb, I always assign the `parameters` to `variables`, so the `resources`
-declarations never directly use any parameter, but only variables. This makes the template easier
-to change, as you can easily add or remove parameters and change how a variable's
-value is computed without having to change multiple resource declarations.
+> As a rule of thumb, I always assign each parameter to a variable, so the `resources`
+declarations never directly depend on parameters but only on variables. This makes the
+template easier to change, as you can easily add or remove parameters and change how a 
+variable's value is computed without having to change multiple resource declarations.
 
 ### The resources
 
@@ -295,7 +295,7 @@ Just replace the value of the `outputs` property in the template with the previo
 ## The Azure Functions app
 
 In the previous post, we created the Azure Functions proxy app manually through the Azure portal.
-In order to make our deployment automatic and replicable, we need to script our proxy app.
+In order to make our deployment automatic and replicable, we need to script it.
 
 In your Aurelia app root directory, create the following file structure:
 
@@ -338,7 +338,8 @@ This will have the exact same result as what we did using the Azure portal in th
 
 ## Visual Studio Team Services
 
-Now that we have an ARM template ready, we can start creating our build and release pipelines in VSTS.
+Now that our ARM template and our Functions app are ready, we can start creating our build and 
+release pipelines in VSTS.
 
 If you're not familiar with VSTS, let's just say that it supports two different types of pipelines:
 builds and releases. A build pipeline's job is to process some source code and to create one or more
@@ -376,12 +377,13 @@ Then, click on the `Get sources` tab in the left panel. You'll see the following
 
 [![Create Build pipeline, Get Sources step](/images/posts/Deploying-an-Aurelia-app-on-Azure-using-VSTS/Create-Build-Get-Sources-Step.png)](/images/posts/Deploying-an-Aurelia-app-on-Azure-using-VSTS/Create-Build-Get-Sources-Step.png){:target="_blank"}
 
-Here, select the repository from which your code will be fetched.
+Here, select the repository from which your code will be fetched. Selecting `This project` will
+allow you to pick a Git repository from your VSTS project (that's what I did).
 
 #### Adding the tasks
 
 Next, we'll add tasks to our build pipeline. Clicking the `+` button sitting beside the `Phase 1`
-tab in the left panel will display the task list screen. You can browse the available tasks,
+tab in the left panel will display the task selection screen. You can browse the available tasks,
 or use the search bar. After you find the task you want to add, you just have to click its `Add` 
 button, and the task will appear in the left panel. You can then select the task in the left 
 panel and its configuration form will show up in the right panel.
@@ -414,13 +416,13 @@ Once you are done adding the list of tasks, click the `Save` button.
 To summarize, this pipeline will first install the Aurelia CLI, then will restore the application's
 dependencies and transpile and bundle the app. Next, it will create two artifacts: a first one named
 `drop`, which will contain the application's files, and a second named `deploy`, which will contain
-the ARM template and other scripts that our release pipeline will use.
+the ARM template, the Azure Functions app, and other scripts that our release pipeline will use.
 
 ### The release pipeline
 
-The release pipeline is linked to a source of build artifacts, and is made of one or more environments,
-which can be connected together in sequence or in parallel. Each environment is a sequence of tasks,
-just like a build pipeline.
+The release pipeline is linked to a source, which in our case will be build artifacts, and is made 
+of one or more environments, which can be connected together in sequence or in parallel. Each 
+environment is a sequence of tasks, just like a build pipeline.
 
 #### Installing VSTS extensions
 
@@ -432,6 +434,8 @@ retrieves the output of an ARM template deployment and exposes them as VSTS vari
 to the next tasks in the sequence. The second extension will add a release task allowing to update
 the App settings of an App Service in Azure. Those two extensions are free and open source.
 
+To install the extensions, just follow the two links and, for each, click `Install` and follow the process.
+
 #### Creating the release definition
 
 Once this is done, go to `Build and Release`, then `Releases`, click on `Create release definition` and select
@@ -440,7 +444,7 @@ Once this is done, go to `Build and Release`, then `Releases`, click on `Create 
 [![Create Release pipeline, create environment step](/images/posts/Deploying-an-Aurelia-app-on-Azure-using-VSTS/Create-Release-Create-Environment.png)](/images/posts/Deploying-an-Aurelia-app-on-Azure-using-VSTS/Create-Release-Create-Environment.png){:target="_blank"}
 
 For the sake of this post, let's just create a single `production` environment, so go ahead and change the
-name of the default environment.
+name to `production`.
 
 #### Linking the build artifact
 
@@ -460,14 +464,14 @@ Thanks to this, every time a new build is completed successfully, the release pi
 
 #### Adding variables
 
-Next, let's create two variables to make our release pipeline easier to maintain. Select the `Variables` tab,
-then `Process variables`, and `Add` the two following rows:
+Next, let's create some variables to make our release pipeline easier to maintain. Select the `Variables` tab,
+then `Process variables`, and `Add` the following rows:
 
 | Name | Value |
 | ---- | ----- |
 | AppService.Name | *The unique name for your application. This will be the subdomaine of `azurewebsites.net` used to access to your app. For example, I put `manuelguilbault-blog-post-aurelia-azure` here, so the URL to my app is `http://manuelguilbault-blog-post-aurelia-azure.azurewebsites.net`* |
 | ResourceGroup.Name | *The name of the resource group on which the application's resources will be deployed. I used `blog-post-aurelia-azure-production` here.* |
-| BuildArtifact.Name | *The name of the build pipeline to which our release pipeline is linked. Here I used `post-azure-aurelia`.* |
+| BuildArtifact.Name | *The value of the Source alias field when you linked the build artifact. By default, this is the name of the build pipeline to which our release pipeline is linked. Here I used `post-azure-aurelia`.* |
 
 Then, click `Save`.
 
@@ -480,33 +484,33 @@ Here's the sequence of tasks, along with their properties, to add to the release
 
 | Task type | Property | Value |
 | --------- | -------- | ----- |
-| **Azure Resource Group Deployment** | Azure subscription | *Select your Azure subscription* |
+| **Azure Resource Group Deployment** | Azure subscription | *Select your Azure subscription.* |
 | | Resource group | $(ResourceGroup.Name) |
-| | Location | *Select the location where you want to deploy your app* |
+| | Location | *Select the location where you want to deploy your app. Here I used `West Europe`.* |
 | | Template | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/deploy/azure/azuredeploy.json |
 | | Override template parameters | -appName $(AppService.Name) |
 | **ARM Outputs** | Azure Connection Type | Azure Resource Manager |
-| | AzureRM Subscription | *Select your Azure subscription* |
+| | AzureRM Subscription | *Select your Azure subscription.* |
 | | Resource Group | $(ResourceGroup.Name) |
 | | Outputs to process | Storage.Account.Name, Storage.Container.Name |
 | **Azure File Copy** | Source | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/drop/ |
 | | Azure Connection Type | Azure Resource Manager |
-| | Azure Subscription | *Select your Azure subscription* |
+| | Azure Subscription | *Select your Azure subscription.* |
 | | Destination Type | Azure Blob |
 | | RM Storage Account | $(Storage.Account.Name) |
 | | Container Name | $(Storage.Container.Name) |
-| | Additional Argumenta | /SetContentType |
+| | Additional Arguments | /SetContentType |
 | **Azure PowerShell** | Azure Connection Type | Azure Resource Manager |
-| | Azure Subscription | *Select your Azure subscription* |
+| | Azure Subscription | *Select your Azure subscription.* |
 | | Script Type | Script File Path |
 | | Script Path | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/deploy/azure/tools/generate-sas-token.ps1 |
 | | Script Arguments | -ResourceGroup $(ResourceGroup.Name) -StorageAccount $(Storage.Account.Name) -StorageContainer $(Storage.Container.Name) -Permission r -ExportTo Storage.SasToken |
-| **Azure App Service Deploy** | Azure Subscription | *Select your Azure subscription* |
+| **Azure App Service Deploy** | Azure Subscription | *Select your Azure subscription.* |
 | | App Service Name | $(AppService.Name) |
 | | Package or folder | $(System.DefaultWorkingDirectory)/$(BuildArtifact.Name)/deploy/azure/functions-app/ |
-| | Publish using Web Deploy | *Check it* |
-| | Remove additional files at destination | *Check it* |
-| **Azure App Service: Set App settings** | AzureRM Subscription | *Select your Azure subscription* |
+| | Publish using Web Deploy | *Check it.* |
+| | Remove additional files at destination | *Check it.* |
+| **Azure App Service: Set App settings** | AzureRM Subscription | *Select your Azure subscription.* |
 | | Azure App Service | $(AppService.Name) |
 | | Resource Group | $(ResourceGroup.Name) |
 | | App Settings | Storage.SasToken='$(Storage.SasToken)' |
@@ -532,7 +536,7 @@ This script is called with the resource group, the Storage account name, and the
 name as parameters. It is expected to generate a SAS token with read permissions on the Storage
 container and to assign this token to the `Storage.SasToken` VSTS variable.
 
-The content of this script is pretty straightforward:
+The content of this script is pretty straightforward if you're familiar with Azure Powershell:
 
 ```powershell
 Param(

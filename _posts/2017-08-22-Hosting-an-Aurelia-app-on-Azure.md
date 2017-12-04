@@ -11,7 +11,7 @@ published : true
 In this serie:
 
 1. [Hosting an Aurelia app on Azure (this post)](/blog/2017/08/22/Hosting-an-Aurelia-app-on-Azure/)
-2. [Deploying an Aurelia app on Azure using VSTS](/blog/2017/11/29/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
+2. [Deploying an Aurelia app on Azure using VSTS](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
 3. Adding deep linking support to an Azure Functions-based Aurelia app (coming soon)
 4. Adding Let's Encrypt to an Azure Functions-based Aurelia app (coming soon)
 
@@ -202,7 +202,7 @@ With two very simple proxy functions and a Blob storage container, we now have a
 hosted on Azure, for a very cheap price. Additionally, since our application is accessed through a function app, 
 we can easily add a custom domain and an SSL certificate to our app.
 
-In my [next post](/blog/2017/11/29/Deploying-an-Aurelia-app-on-Azure-using-VSTS/), I show how to use 
+In my [next post](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/), I show how to use 
 [Visual Studio Team Services](https://www.visualstudio.com/){:target="_blank"}
 to automate the build and deployment of an Aurelia application to a Blob storage container. Stay tuned!
 
