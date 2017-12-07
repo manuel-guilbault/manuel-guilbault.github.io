@@ -5,6 +5,7 @@ tags: [Azure, VSTS, DevOps]
 image:
   feature: "microsoft-azure-logo.svg"
   teaser: "microsoft-azure-logo.svg"
+summary: "In my previous post, I explained how to host an Aurelia application on Azure for very cheap. In this post, I'll explain how to use Visual Studio Team Services (VSTS) to easily deploy a static website or SPA application to Azure."
 published : true
 ---
 
@@ -12,7 +13,7 @@ In this serie:
 
 1. [Hosting an Aurelia app on Azure](/blog/2017/08/22/Hosting-an-Aurelia-app-on-Azure/)
 2. [Deploying an Aurelia app on Azure using VSTS (this post)](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
-3. Adding deep linking support to an Azure Functions-based Aurelia app (coming soon)
+3. [Adding deep linking support to an Azure Functions-based Aurelia app](/blog/2017/12/07/Adding-deep-linking-support-to-Azure-Functions-based-Aurelia-app/)
 4. Adding Let's Encrypt to an Azure Functions-based Aurelia app (coming soon)
 
 <hr>
@@ -591,7 +592,9 @@ can't find what you need, the Azure PowerShell API is [pretty well documented](h
 ## What's next?
 
 If your Aurelia application uses the router in push state mode, you may have noticed that the current
-solution doesn't support deep linking. In the next post, we'll address this problem.
+solution doesn't support deep linking. In my 
+[next post](/blog/2017/12/07/Adding-deep-linking-support-to-Azure-Functions-based-Aurelia-app/),
+I address this problem.
 
 In a further post, we'll see how to add a custom domain to our app. We'll also see how to integrate the
 [Let's Encrypt Azure site extension](https://github.com/sjkp/letsencrypt-siteextension){:target="_blank"} with our

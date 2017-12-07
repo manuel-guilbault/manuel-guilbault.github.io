@@ -5,6 +5,16 @@ tags: [Azure, Aurelia, Web]
 image:
   feature: "microsoft-azure-logo.svg"
   teaser: "microsoft-azure-logo.svg"
+summary: "When it comes to hosting a static website on Azure, there are multiple possibilities, each with
+their own advantages and limitations.
+
+One of those possibilities is to host the static files as a Web Application. However, this can be a pretty
+expensive solution, as the cheapest pricing tier supporting custom domains is a little more than 8 euros per
+month. Even more, if you want to support SSL, it bumps up to nearly 50 euros.
+
+In this blog post, I'm going to show how to host an Aurelia application (or any static site, actually)
+on Azure for *almost* nothing. We'll host the application's files on a Blob storage container, then use
+an Azure Proxy Function, which will act as an entry point and work around some limitations of Blob storage."
 published : true
 ---
 
@@ -12,7 +22,7 @@ In this serie:
 
 1. [Hosting an Aurelia app on Azure (this post)](/blog/2017/08/22/Hosting-an-Aurelia-app-on-Azure/)
 2. [Deploying an Aurelia app on Azure using VSTS](/blog/2017/12/04/Deploying-an-Aurelia-app-on-Azure-using-VSTS/)
-3. Adding deep linking support to an Azure Functions-based Aurelia app (coming soon)
+3. [Adding deep linking support to an Azure Functions-based Aurelia app](/blog/2017/12/07/Adding-deep-linking-support-to-Azure-Functions-based-Aurelia-app/)
 4. Adding Let's Encrypt to an Azure Functions-based Aurelia app (coming soon)
 
 <hr>

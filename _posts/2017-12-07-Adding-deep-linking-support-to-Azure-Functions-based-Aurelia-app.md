@@ -1,10 +1,15 @@
 ---
 layout: post
-title: "Deploying an Aurelia app on Azure using VSTS"
+title: "Adding deep linking support to an Azure Functions-based Aurelia app"
 tags: [Azure, VSTS, DevOps]
 image:
   feature: "microsoft-azure-logo.svg"
   teaser: "microsoft-azure-logo.svg"
+summary: "In the previous posts of this serie, we saw a very unexpensive solution to host an Aurelia app on Azure.
+We also saw how to automate the deployment process of an Aurelia app on Azure using Visual Studio Team Services.
+
+However, the current state of the solution doesn't support deep linking if the app uses the router in push state mode.
+In this post, we'll see how to fix this."
 published : true
 ---
 
@@ -51,7 +56,9 @@ At the moment of writing, the Azure Functions proxies don't support this type of
 The only solution is to remove the `proxies.json` file and to create a full-fledged Azure Function
 that will act as a proxy and that will implement the fallback mechanism.
 
-In your Aurelia app root directory, adjust the file structure to match the following:
+First, delete the `azure/functions-app/proxies.json` file.
+
+Then, in your Aurelia app root directory, adjust the file structure to match the following:
 
 ```
 azure
@@ -61,8 +68,6 @@ azure
     │   └── index.js
     └── host.json
 ```
-
-First, delete the `azure/functions-app/proxies.json` file.
 
 Next, put the following snippet in `azure/functions-app/proxy/function.json`:
 
@@ -192,7 +197,7 @@ If you give it a try, deep linking should now work properly.
 
 Solving the deep linking problem was not that complicated. However, it would be pretty neat if 
 the Azure Functions proxies supported this kind of feature (there's already a 
-[feature request](https://github.com/Azure/Azure-Functions/issues/606) for this).
+[feature request](https://github.com/Azure/Azure-Functions/issues/606){:target="_blank"} for this).
 In the meantime, this work around is an okay enough solution.
 
 ## What's next?
