@@ -459,3 +459,14 @@ with a generic, reusable solution, and then recombine them together to address o
 specific problem. **Shameless plug alert**: this aspect is one of the many topics addressed 
 in [Learning Aurelia](https://www.packtpub.com/web-development/learning-aurelia){:target="_blank"}. You should
 definitely give it a look!
+
+---
+
+## Update 2018-03-02
+
+Reader @sokratismanolis pointed out in [this comment](http://disq.us/p/1qifjgc) that the code
+doesn't work on IE 11 and Edge. I didn't have time to find out the core of the issue yet, but
+it seems to be caused by a delegated event listener being fired before a data binding instruction
+is refreshed. I worked around the issue by removing the delegated event listener and by using
+the `@observable` attribute on `selectedFiles`, as you can see on
+[this branch](https://github.com/manuel-guilbault/learning-aurelia-image-files-picker/tree/2018-03-02-fix-on-edge).
